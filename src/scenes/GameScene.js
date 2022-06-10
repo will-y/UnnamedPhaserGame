@@ -9,10 +9,16 @@ class GameScene extends Scene {
     create() {
         // Add, scale, and make up a speed for our creature
         this.player = this.physics.add.sprite(10, 10, 'main-character');
-        this.player.setScale(0.5);
         this.playerSpeed = 300;
         // Create a helper object for our arrow keys
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        // Coin things
+        const coins = this.physics.add.group();
+        const coin = coins.create(200, 200, "coin");
+        coin.setBounce(1);
+
+        this.physics.add.overlap(this.player, coins, this.collidePlayerCoin);
     }
 
     update() {
@@ -36,6 +42,10 @@ class GameScene extends Scene {
         else {
             this.player.setVelocityY(0);
         }
+    }
+
+    collidePlayerCoin(player, coin) {
+        coin.disableBody(true, true);
     }
 
 }
