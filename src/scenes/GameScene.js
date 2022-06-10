@@ -2,7 +2,6 @@ import {Scene} from 'phaser';
 import Entity from "../entity/Entity";
 
 class GameScene extends Scene {
-
     constructor() {
         super("scene-game");
     }
@@ -28,7 +27,7 @@ class GameScene extends Scene {
         this.physics.add.overlap(this.player, coins, this.collidePlayerCoin);
     }
 
-    update() {
+    update(time, delta) {
         // Listen for keyboard input
         const {left, right, up, down} = this.cursors;
         if (left.isDown) {
