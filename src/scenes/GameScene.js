@@ -8,9 +8,9 @@ class GameScene extends Scene {
 
     create() {
         // Add, scale, and make up a speed for our creature
-        this.cat = this.physics.add.sprite(10, 10, 'main-character');
-        this.cat.setScale(0.5);
-        this.catSpeed = 300;
+        this.player = this.physics.add.sprite(10, 10, 'main-character');
+        this.player.setScale(0.5);
+        this.playerSpeed = 300;
         // Create a helper object for our arrow keys
         this.cursors = this.input.keyboard.createCursorKeys();
     }
@@ -19,22 +19,22 @@ class GameScene extends Scene {
         // Listen for keyboard input
         const {left, right, up, down} = this.cursors;
         if (left.isDown) {
-            this.cat.setVelocityX(-this.catSpeed);
+            this.player.setVelocityX(-this.playerSpeed);
         }
         else if (right.isDown) {
-            this.cat.setVelocityX(this.catSpeed);
+            this.player.setVelocityX(this.playerSpeed);
         }
         else {
-            this.cat.setVelocityX(0);
+            this.player.setVelocityX(0);
         }
         if (up.isDown) {
-            this.cat.setVelocityY(-this.catSpeed);
+            this.player.setVelocityY(-this.playerSpeed);
         }
         else if (down.isDown) {
-            this.cat.setVelocityY(this.catSpeed);
+            this.player.setVelocityY(this.playerSpeed);
         }
         else {
-            this.cat.setVelocityY(0);
+            this.player.setVelocityY(0);
         }
     }
 
