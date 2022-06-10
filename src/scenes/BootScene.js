@@ -7,7 +7,8 @@ class BootScene extends Scene {
 
     preload() {
         // Load any assets here from your assets directory
-        this.load.image('main-character', 'assets/mc_forward.png');
+        this.load.image('main-character', 'assets/sprite/mc_forward.png');
+        this.load.image('coin', 'assets/sprite/coin.png');
     }
 
     create() {
