@@ -1,6 +1,7 @@
 import Phaser, {Game} from 'phaser';
 import BootScene from './scenes/BootScene';
 import GameScene from './scenes/GameScene';
+import FloorScene from "./scenes/FloorScene";
 
 const canvas = document.getElementById('game-canvas');
 const config = {
@@ -16,7 +17,8 @@ const config = {
     },
     scene: [
         BootScene,
-        GameScene
+        GameScene,
+        FloorScene
     ]
 };
 

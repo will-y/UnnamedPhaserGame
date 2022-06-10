@@ -12,6 +12,28 @@ class GameScene extends Scene {
         // this.player = this.physics.add.sprite(10, 10, 'main-character');
         this.player = this.physics.add.existing(this.player);
         this.playerSpeed = 300;
+
+        // player animations
+        this.anims.create({
+            key: "forward",
+            frames: this.anims.generateFrameNumbers('main-character', {start: 0, end: 5}),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: "backward",
+            frames: this.anims.generateFrameNumbers('main-character', {start: 6, end: 10}),
+            frameRate: 10,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: "still",
+            frames: [{key: 'main-character', frame: 0}],
+            frameRate: 20
+        });
+
         // Create a helper object for our arrow keys
         this.cursors = this.input.keyboard.createCursorKeys();
 
@@ -32,21 +54,23 @@ class GameScene extends Scene {
         const {left, right, up, down} = this.cursors;
         if (left.isDown) {
             this.player.setVelocityX(-this.playerSpeed);
-        }
-        else if (right.isDown) {
+            // this.player.anims.play('still');
+        } else if (right.isDown) {
             this.player.setVelocityX(this.playerSpeed);
-        }
-        else {
+            // this.player.anims.play('still');
+        } else {
             this.player.setVelocityX(0);
         }
+
         if (up.isDown) {
             this.player.setVelocityY(-this.playerSpeed);
-        }
-        else if (down.isDown) {
+            this.player.anims.play('backward', true);
+        } else if (down.isDown) {
             this.player.setVelocityY(this.playerSpeed);
-        }
-        else {
+            this.player.anims.play('forward', true);
+        } else {
             this.player.setVelocityY(0);
+            this.player.anims.play('still');
         }
     }
 
