@@ -14,14 +14,14 @@ class Player extends Entity {
         this.scene.anims.create({
             key: "forward",
             frames: this.anims.generateFrameNumbers('main-character', {start: 0, end: 5}),
-            frameRate: 10,
+            frameRate: 16,
             repeat: -1
         });
 
         this.scene.anims.create({
             key: "backward",
             frames: this.anims.generateFrameNumbers('main-character', {start: 6, end: 10}),
-            frameRate: 10,
+            frameRate: 16,
             repeat: -1
         });
 

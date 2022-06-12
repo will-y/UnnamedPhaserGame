@@ -1,5 +1,5 @@
 class Entity extends Phaser.Physics.Arcade.Sprite {
-    constructor(scene, x, y, key) {
+    constructor(scene, x, y, key, collideObject) {
         super(scene, x, y, key);
 
         this.scene = scene;
@@ -9,10 +9,21 @@ class Entity extends Phaser.Physics.Arcade.Sprite {
 
         scene.sys.displayList.add(this);
         scene.sys.updateList.add(this);
+
+        if (collideObject) {
+            this.collideObject = collideObject;
+            // no longer using groups, idk if that is worse
+            this.scene.physics.add.overlap(this, collideObject, this.onCollide);
+        }
     }
 
     updateEntity(time, delta) {
 
+    }
+
+    onCollide(thisObject, collidingObject) {
+        // by default don't need to do anything
+        console.log("Actually here");
     }
 }
 
