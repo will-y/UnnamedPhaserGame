@@ -6,7 +6,8 @@
       "requiredAssets": [
         {
           "key": "coin",
-          "url": "assets/sprite/coin.png"
+          "url": "assets/sprite/coin.png",
+          "type": "sprite"
         }
       ],
       "entities": [

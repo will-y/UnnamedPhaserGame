@@ -18,15 +18,17 @@ class LevelBootScene extends Scene {
         this.load.json(this.key, `assets/level/${this.key}.json`);
 
         // load in common things
-        this.load.spritesheet('main-character', 'assets/sprite/main_character.png', {frameWidth: 28, frameHeight:64})
-        this.load.image('coin', 'assets/sprite/coin.png');
+        this.load.spritesheet('main-character', 'assets/sprite/main_character.png', {frameWidth: 28, frameHeight:64});
 
         // load in starting room
-        this.load.json(`assets/level/${this.key}-start-room.json`);
+        this.load.json(`${this.key}-start-room`, `assets/level/${this.key}-start-room.json`);
         this.game.scene.add(`${this.key}-start-room-boot`, new RoomBootScene(`${this.key}-start-room`));
     }
 
     create() {
+        console.log(`Level Boot Scene Created [${this.key}]`);
         this.scene.start(`${this.key}-start-room-boot`);
     }
 }
+
+export default LevelBootScene;
