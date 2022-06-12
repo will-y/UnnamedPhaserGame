@@ -17,9 +17,8 @@ const config = {
     },
     scene: [
         BootScene,
-        GameScene,
-        FloorScene
+        GameScene
     ]
 };
 
-const game = new Game(config);
+export const game = new Game(config);

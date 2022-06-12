@@ -1,10 +1,9 @@
 import {Scene} from 'phaser';
 
 class FloorScene extends Scene {
-    constructor() {
-        // TODO: figure out how to do this
-        super("floor-1");
-        this.key = "floor-1";
+    constructor(key) {
+        super(key);
+        this.key = key;
     }
 
     preload() {

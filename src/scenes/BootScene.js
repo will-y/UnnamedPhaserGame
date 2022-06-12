@@ -14,6 +14,7 @@ class BootScene extends Scene {
 
     create() {
         this.scene.start('scene-game');
+
     }
 }
 
