@@ -1,5 +1,6 @@
 import {Scene} from 'phaser';
 import Entity from "../entity/Entity";
+import Player from "../entity/Player";
 
 class RoomScene extends Scene {
     constructor(key, roomData) {
@@ -15,38 +16,18 @@ class RoomScene extends Scene {
     create() {
         console.log(`Room Scene Created [${this.key}]`);
 
+        this.cursors = this.input.keyboard.addKeys({
+            up:Phaser.Input.Keyboard.KeyCodes.W,
+            down:Phaser.Input.Keyboard.KeyCodes.S,
+            left:Phaser.Input.Keyboard.KeyCodes.A,
+            right:Phaser.Input.Keyboard.KeyCodes.D});
+
         // Create Coins and things
         // Going to need a player start position for rooms
         // TODO: Add these to player class
-        this.player = new Entity(this, 10, 10, 'main-character');
-        this.player = this.physics.add.existing(this.player);
-        this.playerSpeed = 300;
-        this.anims.create({
-            key: "forward",
-            frames: this.anims.generateFrameNumbers('main-character', {start: 0, end: 5}),
-            frameRate: 10,
-            repeat: -1
-        });
+        this.player = new Player(this, 10, 10, 'main-character', this.cursors);
 
-        this.anims.create({
-            key: "backward",
-            frames: this.anims.generateFrameNumbers('main-character', {start: 6, end: 10}),
-            frameRate: 10,
-            repeat: -1
-        });
 
-        this.anims.create({
-            key: "still",
-            frames: [{key: 'main-character', frame: 0}],
-            frameRate: 20
-        });
-
-        this.cursors = this.input.keyboard.addKeys(
-            {
-                up:Phaser.Input.Keyboard.KeyCodes.W,
-                down:Phaser.Input.Keyboard.KeyCodes.S,
-                left:Phaser.Input.Keyboard.KeyCodes.A,
-                right:Phaser.Input.Keyboard.KeyCodes.D});
 
         // Create Game Objects
         const gameObjects = {};
@@ -64,27 +45,7 @@ class RoomScene extends Scene {
     }
 
     update(time, delta) {
-        const {left, right, up, down} = this.cursors;
-        if (left.isDown) {
-            this.player.setVelocityX(-this.playerSpeed);
-            // this.player.anims.play('still');
-        } else if (right.isDown) {
-            this.player.setVelocityX(this.playerSpeed);
-            // this.player.anims.play('still');
-        } else {
-            this.player.setVelocityX(0);
-        }
-
-        if (up.isDown) {
-            this.player.setVelocityY(-this.playerSpeed);
-            this.player.anims.play('backward', true);
-        } else if (down.isDown) {
-            this.player.setVelocityY(this.playerSpeed);
-            this.player.anims.play('forward', true);
-        } else {
-            this.player.setVelocityY(0);
-            this.player.anims.play('still');
-        }
+        this.player.updateEntity(time, delta);
     }
 
     // TODO: need to figure out how interaction with player will work
