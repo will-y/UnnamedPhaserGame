@@ -48,6 +48,7 @@ class RoomScene extends Scene {
                 left:Phaser.Input.Keyboard.KeyCodes.A,
                 right:Phaser.Input.Keyboard.KeyCodes.D});
 
+        // Create Game Objects
         const gameObjects = {};
 
         this.roomData.entities.forEach(entityGroup => {
@@ -57,10 +58,40 @@ class RoomScene extends Scene {
                 gameObjects[entityGroup.type].create(instance.x, instance.y, entityGroup.type);
             });
         });
+
+        // Camera things
+        this.cameras.main.startFollow(this.player);
     }
 
     update(time, delta) {
+        const {left, right, up, down} = this.cursors;
+        if (left.isDown) {
+            this.player.setVelocityX(-this.playerSpeed);
+            // this.player.anims.play('still');
+        } else if (right.isDown) {
+            this.player.setVelocityX(this.playerSpeed);
+            // this.player.anims.play('still');
+        } else {
+            this.player.setVelocityX(0);
+        }
 
+        if (up.isDown) {
+            this.player.setVelocityY(-this.playerSpeed);
+            this.player.anims.play('backward', true);
+        } else if (down.isDown) {
+            this.player.setVelocityY(this.playerSpeed);
+            this.player.anims.play('forward', true);
+        } else {
+            this.player.setVelocityY(0);
+            this.player.anims.play('still');
+        }
+    }
+
+    // TODO: need to figure out how interaction with player will work
+    // probably need a class for pickups / enemies and then have a type to create classes and have methods there for
+    // handling interaction with player
+    collidePlayerCoin(player, coin) {
+        coin.disableBody(true, true);
     }
 }
 
