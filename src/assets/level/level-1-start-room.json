@@ -5,20 +5,24 @@
     {
       "key": "coin",
       "url": "assets/sprite/coin.png",
-      "type": "sprite"
+      "type": "image"
+    },
+    {
+      "key": "rat",
+      "url": "assets/sprite/enemy/rat.png",
+      "type": "sprite_sheet",
+      "width": 34,
+      "height": 13
     }
   ],
   "entities": [
     {
-      "type": "coin",
+      "key": "coin",
+      "type": "pickup",
       "instances": [
         {
           "x": 200,
           "y": 200
-        },
-        {
-          "x": 400,
-          "y": 400
         },
         {
           "x": 400,
@@ -35,6 +39,16 @@
         {
           "x": 100,
           "y": 550
+        }
+      ]
+    },
+    {
+      "type": "enemy",
+      "key": "rat",
+      "instances": [
+        {
+          "x": 400,
+          "y": 400
         }
       ]
     }

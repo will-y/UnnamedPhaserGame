@@ -15,7 +15,11 @@ class RoomBootScene extends Scene {
 
         requiredAssets.forEach(asset => {
             if (!this.textures.list[asset.key]) {
-                this.load.image(asset.key, asset.url);
+                if (asset.type === "image") {
+                    this.load.image(asset.key, asset.url);
+                } else if (asset.type === "sprite_sheet") {
+                    this.load.spritesheet(asset.key, asset.url, {frameWidth: asset.width, frameHeight: asset.height});
+                }
                 console.log("Loaded Asset for " + asset.key);
             }
         });

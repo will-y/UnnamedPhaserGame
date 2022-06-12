@@ -2,6 +2,7 @@ import {Scene} from 'phaser';
 import Entity from "../entity/Entity";
 import Player from "../entity/Player";
 import Pickup from "../entity/Pickup";
+import Enemy from "../entity/Enemy";
 
 class RoomScene extends Scene {
     constructor(key, roomData) {
@@ -29,10 +30,14 @@ class RoomScene extends Scene {
         const gameObjects = {};
 
         this.roomData.entities.forEach(entityGroup => {
-            gameObjects[entityGroup.type] = this.physics.add.group();
+            gameObjects[entityGroup.key] = this.physics.add.group();
 
             entityGroup.instances.forEach(instance => {
-                gameObjects[entityGroup.type].add(new Pickup(this, instance.x, instance.y, entityGroup.type, this.player));
+                if (entityGroup.type === "pickup") {
+                    gameObjects[entityGroup.key].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player));
+                } else if (entityGroup.type === "enemy") {
+                    gameObjects[entityGroup.key].add(new Enemy(this, instance.x, instance.y, entityGroup.key));
+                }
                 // gameObjects[entityGroup.type].create(instance.x, instance.y, entityGroup.type);
             });
         });
