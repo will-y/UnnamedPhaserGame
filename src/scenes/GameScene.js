@@ -56,6 +56,7 @@ class GameScene extends Scene {
     }
 
     update(time, delta) {
+        // TODO: Add this to the player class
         // Listen for keyboard input
         const {left, right, up, down} = this.cursors;
         if (left.isDown) {

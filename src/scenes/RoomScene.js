@@ -1,14 +1,14 @@
 import {Scene} from 'phaser';
 
 class RoomScene extends Scene {
-    constructor(key) {
+    constructor(key, roomData) {
         super(key);
         this.key = key;
+        this.roomData = roomData;
     }
 
     preload() {
-        const floor = this.load.json(this.key, "assets/level/floor-1.json");
-        console.log(floor);
+        // should already have everything loaded
     }
 
     create() {

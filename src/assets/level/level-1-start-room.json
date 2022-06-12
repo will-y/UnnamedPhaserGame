@@ -1,0 +1,42 @@
+{
+  "xSize": 100,
+  "ySize": 100,
+  "requiredAssets": [
+    {
+      "key": "coin",
+      "url": "assets/sprite/coin.png"
+    }
+  ],
+  "entities": [
+    {
+      "type": "coin",
+      "x": 200,
+      "y": 200
+    },
+    {
+      "type": "coin",
+      "x": 400,
+      "y": 400
+    },
+    {
+      "type": "coin",
+      "x": 400,
+      "y": 200
+    },
+    {
+      "type": "coin",
+      "x": 500,
+      "y": 570
+    },
+    {
+      "type": "coin",
+      "x": 500,
+      "y": 100
+    },
+    {
+      "type": "coin",
+      "x": 100,
+      "y": 550
+    }
+  ]
+}
