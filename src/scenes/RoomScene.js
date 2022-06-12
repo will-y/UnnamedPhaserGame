@@ -1,6 +1,6 @@
 import {Scene} from 'phaser';
 
-class FloorScene extends Scene {
+class RoomScene extends Scene {
     constructor(key) {
         super(key);
         this.key = key;
@@ -20,4 +20,4 @@ class FloorScene extends Scene {
     }
 }
 
-export default FloorScene;
+export default RoomScene;
