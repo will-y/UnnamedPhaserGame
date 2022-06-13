@@ -1,8 +1,8 @@
 import Enemy from "./Enemy";
 
 class Rat extends Enemy {
-    constructor(scene, x, y, key) {
-        super(scene, x, y, key);
+    constructor(scene, x, y, key, speed, player) {
+        super(scene, x, y, key, speed, player);
     }
 
     setUpEnemyAnimation() {

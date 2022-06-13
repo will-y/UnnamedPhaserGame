@@ -1,6 +1,8 @@
 {
-  "xSize": 100,
-  "ySize": 100,
+  "xSize": 1381,
+  "ySize": 1920,
+  "playerXStart": 400,
+  "playerYStart": 400,
   "requiredAssets": [
     {
       "key": "coin",
@@ -13,6 +15,11 @@
       "type": "sprite_sheet",
       "width": 34,
       "height": 13
+    },
+    {
+      "key": "level-1-start-room",
+      "url": "assets/sprite/level/level-1-start-room.png",
+      "type": "image"
     }
   ],
   "entities": [
@@ -48,7 +55,8 @@
       "instances": [
         {
           "x": 400,
-          "y": 400
+          "y": 400,
+          "speed": 100
         }
       ]
     }

@@ -14,7 +14,7 @@ class LevelBootScene extends Scene {
     }
 
     preload() {
-        // load in floor json
+        // load in level json
         this.load.json(this.key, `assets/level/${this.key}.json`);
 
         // load in common things

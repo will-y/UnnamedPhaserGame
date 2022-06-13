@@ -19,13 +19,16 @@ class RoomScene extends Scene {
     create() {
         console.log(`Room Scene Created [${this.key}]`);
 
+        // load in room background
+        this.add.image(0, 0, this.key).setOrigin(0, 0);
+
         this.cursors = this.input.keyboard.addKeys({
             up:Phaser.Input.Keyboard.KeyCodes.W,
             down:Phaser.Input.Keyboard.KeyCodes.S,
             left:Phaser.Input.Keyboard.KeyCodes.A,
             right:Phaser.Input.Keyboard.KeyCodes.D});
 
-        this.player = new Player(this, 10, 10, 'main-character', this.cursors);
+        this.player = new Player(this, this.roomData.playerXStart, this.roomData.playerYStart, 'main-character', this.cursors);
 
         // Create Game Objects
         const gameObjects = {};
@@ -39,7 +42,7 @@ class RoomScene extends Scene {
                 if (entityGroup.type === "pickup") {
                     gameObjects[entityGroup.key].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player));
                 } else if (entityGroup.type === "enemy") {
-                    const rat = new Rat(this, instance.x, instance.y, entityGroup.key);
+                    const rat = new Rat(this, instance.x, instance.y, entityGroup.key, instance.speed);
                     this.entities.push(rat);
                     gameObjects[entityGroup.key].add(rat);
                 }

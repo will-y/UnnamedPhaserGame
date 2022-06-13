@@ -8,8 +8,6 @@ class RoomBootScene extends Scene {
     }
 
     preload() {
-        // TODO: Using json load in other needed assets
-        // Also check if asset exists already
         const roomData = this.cache.json.get(this.roomKey);
         const requiredAssets = roomData.requiredAssets;
 
