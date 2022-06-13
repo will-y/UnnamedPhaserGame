@@ -12,21 +12,21 @@ class Player extends Entity {
 
     setUpPlayerAnimations() {
         this.scene.anims.create({
-            key: "forward",
+            key: "player_down",
             frames: this.anims.generateFrameNumbers('main-character', {start: 0, end: 5}),
             frameRate: 16,
             repeat: -1
         });
 
         this.scene.anims.create({
-            key: "backward",
+            key: "player_up",
             frames: this.anims.generateFrameNumbers('main-character', {start: 6, end: 10}),
             frameRate: 16,
             repeat: -1
         });
 
         this.scene.anims.create({
-            key: "still",
+            key: "player_still",
             frames: [{key: 'main-character', frame: 0}],
             frameRate: 20
         });
@@ -46,13 +46,13 @@ class Player extends Entity {
 
         if (up.isDown) {
             this.setVelocityY(-this.speed);
-            this.anims.play('backward', true);
+            this.anims.play('player_up', true);
         } else if (down.isDown) {
             this.setVelocityY(this.speed);
-            this.anims.play('forward', true);
+            this.anims.play('player_down', true);
         } else {
             this.setVelocityY(0);
-            this.anims.play('still');
+            this.anims.play('player_still');
         }
     }
 }

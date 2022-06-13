@@ -2,7 +2,8 @@ import {Scene} from 'phaser';
 import Entity from "../entity/Entity";
 import Player from "../entity/Player";
 import Pickup from "../entity/Pickup";
-import Enemy from "../entity/Enemy";
+import Enemy from "../entity/enemy/Enemy";
+import Rat from "../entity/enemy/Rat";
 
 class RoomScene extends Scene {
     constructor(key, roomData) {
@@ -28,6 +29,8 @@ class RoomScene extends Scene {
 
         // Create Game Objects
         const gameObjects = {};
+        this.entities = []
+        this.entities.push(this.player);
 
         this.roomData.entities.forEach(entityGroup => {
             gameObjects[entityGroup.key] = this.physics.add.group();
@@ -36,7 +39,9 @@ class RoomScene extends Scene {
                 if (entityGroup.type === "pickup") {
                     gameObjects[entityGroup.key].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player));
                 } else if (entityGroup.type === "enemy") {
-                    gameObjects[entityGroup.key].add(new Enemy(this, instance.x, instance.y, entityGroup.key));
+                    const rat = new Rat(this, instance.x, instance.y, entityGroup.key);
+                    this.entities.push(rat);
+                    gameObjects[entityGroup.key].add(rat);
                 }
                 // gameObjects[entityGroup.type].create(instance.x, instance.y, entityGroup.type);
             });
@@ -47,7 +52,9 @@ class RoomScene extends Scene {
     }
 
     update(time, delta) {
-        this.player.updateEntity(time, delta);
+        this.entities.forEach(entity => {
+            entity.updateEntity(time, delta);
+        })
     }
 }
 
