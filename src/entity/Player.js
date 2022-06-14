@@ -37,8 +37,6 @@ class Player extends Entity {
             frameRate: 8,
             repeat: -1
         });
-
-        console.log(this.cursors.down);
     }
 
     updateEntity(time, delta) {
@@ -91,29 +89,6 @@ class Player extends Entity {
             this.setVelocity(0, 0);
             this.anims.stop();
         }
-
-        // if (left.isDown) {
-        //     this.setVelocityX(-this.speed);
-        //     this.anims.play('player_right', true);
-        //     this.flipX = true;
-        // } else if (right.isDown) {
-        //     this.setVelocityX(this.speed);
-        //     this.anims.play('player_right', true);
-        //     this.flipX = false;
-        // } else {
-        //     this.setVelocityX(0);
-        //     this.flipX = false;
-        // }
-        //
-        // if (up.isDown) {
-        //     this.setVelocityY(-this.speed);
-        //     this.anims.play('player_up', true);
-        // } else if (down.isDown) {
-        //     this.setVelocityY(this.speed);
-        //     this.anims.play('player_down', true);
-        // } else {
-        //     this.setVelocityY(0);
-        // }
     }
 }
 
