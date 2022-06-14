@@ -79,10 +79,12 @@ class RoomScene extends Scene {
         this.clampVelocity(body.velocity, body.blocked);
 
         // Draw the polygons
-        this.debug
-            .clear()
-            .strokePoints(this.boundry.points)
-            .strokeRectShape(this.playerRect);
+        if (this.physics.world.drawDebug) {
+            this.debug
+                .clear()
+                .strokePoints(this.boundry.points)
+                .strokeRectShape(this.playerRect);
+        }
     }
 
     projectRect(rect, body, time) {
