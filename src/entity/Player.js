@@ -20,7 +20,7 @@ class Player extends Entity {
 
         this.scene.anims.create({
             key: "player_up",
-            frames: this.anims.generateFrameNumbers('main-character', {start: 6, end: 10}),
+            frames: this.anims.generateFrameNumbers('main-character', {start: 6, end: 11}),
             frameRate: 16,
             repeat: -1
         });
@@ -30,30 +30,90 @@ class Player extends Entity {
             frames: [{key: 'main-character', frame: 0}],
             frameRate: 20
         });
+
+        this.scene.anims.create({
+            key: "player_right",
+            frames: this.anims.generateFrameNumbers('main-character', {start: 12, end: 15}),
+            frameRate: 8,
+            repeat: -1
+        });
+
+        console.log(this.cursors.down);
     }
 
     updateEntity(time, delta) {
         const {left, right, up, down} = this.cursors;
-        if (left.isDown) {
-            this.setVelocityX(-this.speed);
-            // this.player.anims.play('still');
+
+        const diagSpeed = Math.sqrt((this.speed**2) / 2);
+
+        if (up.isDown && right.isDown) {
+            // Up Right
+            this.setVelocity(diagSpeed, -diagSpeed);
+            this.anims.play('player_right', true);
+            this.flipX = false;
+        } else if (up.isDown && left.isDown) {
+            // Up Left
+            this.setVelocity(-diagSpeed, -diagSpeed);
+            this.anims.play('player_right', true);
+            this.flipX = true;
+        } else if (down.isDown && right.isDown) {
+            // Down right
+            this.setVelocity(diagSpeed, diagSpeed);
+            this.anims.play('player_right', true);
+            this.flipX = false;
+        } else if (down.isDown && left.isDown) {
+            // Down left
+            this.setVelocity(-diagSpeed, diagSpeed);
+            this.anims.play('player_right', true);
+            this.flipX = true;
+        } else if (up.isDown) {
+            // Up
+            this.setVelocity(0, -this.speed);
+            this.anims.play('player_up', true);
+            this.flipX = false;
+        } else if (down.isDown) {
+            // Down
+            this.setVelocity(0, this.speed);
+            this.anims.play('player_down', true);
+            this.flipX = false;
         } else if (right.isDown) {
-            this.setVelocityX(this.speed);
-            // this.player.anims.play('still');
+            // Right
+            this.setVelocity(this.speed, 0);
+            this.anims.play('player_right', true);
+            this.flipX = false;
+        } else if (left.isDown) {
+            // Left
+            this.setVelocity(-this.speed, 0);
+            this.anims.play('player_right', true);
+            this.flipX = true;
         } else {
-            this.setVelocityX(0);
+            // Nothing down TODO: Implement Facing so can play correct animation here
+            this.setVelocity(0, 0);
+            this.anims.stop();
         }
 
-        if (up.isDown) {
-            this.setVelocityY(-this.speed);
-            this.anims.play('player_up', true);
-        } else if (down.isDown) {
-            this.setVelocityY(this.speed);
-            this.anims.play('player_down', true);
-        } else {
-            this.setVelocityY(0);
-            this.anims.play('player_still');
-        }
+        // if (left.isDown) {
+        //     this.setVelocityX(-this.speed);
+        //     this.anims.play('player_right', true);
+        //     this.flipX = true;
+        // } else if (right.isDown) {
+        //     this.setVelocityX(this.speed);
+        //     this.anims.play('player_right', true);
+        //     this.flipX = false;
+        // } else {
+        //     this.setVelocityX(0);
+        //     this.flipX = false;
+        // }
+        //
+        // if (up.isDown) {
+        //     this.setVelocityY(-this.speed);
+        //     this.anims.play('player_up', true);
+        // } else if (down.isDown) {
+        //     this.setVelocityY(this.speed);
+        //     this.anims.play('player_down', true);
+        // } else {
+        //     this.setVelocityY(0);
+        // }
     }
 }
 
