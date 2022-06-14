@@ -1,12 +1,11 @@
-import Entity from "./Entity";
+import MovableEntity from "./MovableEntity";
 
-class Player extends Entity {
-    constructor(scene, x, y, key, cursors) {
-        super(scene, x, y, key);
-
+// TODO: Abstract this animation stuff so other entities can use it
+class Player extends MovableEntity {
+    constructor(scene, x, y, key, speed, cursors) {
+        super(scene, x, y, key, speed);
+        this.maxSpeed = speed;
         this.cursors = cursors
-        scene.physics.add.existing(this);
-        this.speed = 300;
         this.setUpPlayerAnimations();
     }
 
@@ -39,56 +38,70 @@ class Player extends Entity {
         });
     }
 
+    playMoveAnimation() {
+        if (this.direction < 80 || this.direction > 280) {
+            // Right
+            this.anims.play("player_right", true);
+            this.flipX = false;
+        } else if (this.direction >= 80 && this.direction <= 100) {
+            // UP
+            this.anims.play("player_up", true);
+            this.flipX = false;
+        } else if (this.direction > 100 && this.direction < 260) {
+            // LEFT
+            this.anims.play("player_right", true);
+            this.flipX = true;
+        } else if (this.direction >= 260 && this.direction <= 280) {
+            // DOWN
+            this.anims.play("player_down", true);
+            this.flipX = false;
+        }
+    }
+
+
     updateEntity(time, delta) {
         const {left, right, up, down} = this.cursors;
 
-        const diagSpeed = Math.sqrt((this.speed**2) / 2);
-
         if (up.isDown && right.isDown) {
             // Up Right
-            this.setVelocity(diagSpeed, -diagSpeed);
-            this.anims.play('player_right', true);
-            this.flipX = false;
+            this.direction = 45;
+            this.speed = this.maxSpeed;
         } else if (up.isDown && left.isDown) {
             // Up Left
-            this.setVelocity(-diagSpeed, -diagSpeed);
-            this.anims.play('player_right', true);
-            this.flipX = true;
+            this.direction = 135;
+            this.speed = this.maxSpeed;
         } else if (down.isDown && right.isDown) {
             // Down right
-            this.setVelocity(diagSpeed, diagSpeed);
-            this.anims.play('player_right', true);
-            this.flipX = false;
+            this.direction = 315;
+            this.speed = this.maxSpeed;
         } else if (down.isDown && left.isDown) {
             // Down left
-            this.setVelocity(-diagSpeed, diagSpeed);
-            this.anims.play('player_right', true);
-            this.flipX = true;
+            this.direction = 225;
+            this.speed = this.maxSpeed;
         } else if (up.isDown) {
             // Up
-            this.setVelocity(0, -this.speed);
-            this.anims.play('player_up', true);
-            this.flipX = false;
+            this.direction = 90;
+            this.speed = this.maxSpeed;
         } else if (down.isDown) {
             // Down
-            this.setVelocity(0, this.speed);
-            this.anims.play('player_down', true);
-            this.flipX = false;
+            this.direction = 270;
+            this.speed = this.maxSpeed;
         } else if (right.isDown) {
             // Right
-            this.setVelocity(this.speed, 0);
-            this.anims.play('player_right', true);
-            this.flipX = false;
+            this.direction = 0;
+            this.speed = this.maxSpeed;
         } else if (left.isDown) {
             // Left
-            this.setVelocity(-this.speed, 0);
-            this.anims.play('player_right', true);
-            this.flipX = true;
+            this.direction = 180;
+            this.speed = this.maxSpeed;
         } else {
-            // Nothing down TODO: Implement Facing so can play correct animation here
-            this.setVelocity(0, 0);
+            this.speed = 0;
             this.anims.stop();
         }
+
+        // Just for player always have this
+        this.velocityChanged = true;
+        super.updateEntity(time, delta);
     }
 }
 
