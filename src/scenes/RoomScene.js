@@ -1,8 +1,6 @@
 import {Scene} from 'phaser';
-import Entity from "../entity/Entity";
 import Player from "../entity/Player";
 import Pickup from "../entity/Pickup";
-import Enemy from "../entity/enemy/Enemy";
 import Rat from "../entity/enemy/Rat";
 
 class RoomScene extends Scene {
@@ -46,18 +44,79 @@ class RoomScene extends Scene {
                     this.entities.push(rat);
                     gameObjects[entityGroup.key].add(rat);
                 }
-                // gameObjects[entityGroup.type].create(instance.x, instance.y, entityGroup.type);
             });
         });
 
         // Camera things
         this.cameras.main.startFollow(this.player);
+
+        // Walls
+        this.debug = this.add.graphics({ lineStyle: { color: 0xffff00 } });
+
+        this.boundry = new Phaser.Geom.Polygon([80, 109, 254, 127, 425, 180, 560, 250, 674, 336, 550, 513, 325, 410, 145, 283, 100, 195, 80, 109]);
+
+        // Will represent the player body
+        this.playerRect = new Phaser.Geom.Rectangle();
+
+        // Will hold a per-step velocity (distance)
+        this.tempVelocity = new Phaser.Math.Vector2();
     }
 
     update(time, delta) {
         this.entities.forEach(entity => {
             entity.updateEntity(time, delta);
-        })
+        });
+
+        const body = this.player.body;
+
+        // Move the player rectangle ahead by one step of the provisional velocity
+        this.projectRect(this.playerRect, body, 1 / this.physics.world.fps);
+
+        // Check if the player rectangle is within the polygon and "block" the body on any corresponding axes
+        this.setBlocked(body.blocked, this.playerRect, this.boundry);
+
+        // Limit the provisional velocity based on the blocked axes
+        this.clampVelocity(body.velocity, body.blocked);
+
+        // Draw the polygons
+        this.debug
+            .clear()
+            .strokePoints(this.boundry.points)
+            .strokeRectShape(this.playerRect);
+    }
+
+    projectRect(rect, body, time) {
+        this.tempVelocity.copy(body.velocity).scale(time);
+        Phaser.Geom.Rectangle.CopyFrom(body, rect);
+        Phaser.Geom.Rectangle.OffsetPoint(rect, this.tempVelocity);
+    }
+
+    clampVelocity(velocity, blocked) {
+        if (blocked.left) velocity.x = Phaser.Math.Clamp(velocity.x, 0, Infinity);
+        if (blocked.right) velocity.x = Phaser.Math.Clamp(velocity.x, -Infinity, 0);
+        if (blocked.up) velocity.y = Phaser.Math.Clamp(velocity.y, 0, Infinity);
+        if (blocked.down) velocity.y = Phaser.Math.Clamp(velocity.y, -Infinity, 0);
+    }
+
+    setBlocked(blocked, rect, bounds) {
+        if (!bounds.contains(rect.left, rect.top)) {
+            blocked.left = true;
+            blocked.up = true;
+        }
+        if (!bounds.contains(rect.left, rect.bottom)) {
+            blocked.left = true;
+            blocked.down = true;
+        }
+        if (!bounds.contains(rect.right, rect.top)) {
+            blocked.right = true;
+            blocked.up = true;
+        }
+        if (!bounds.contains(rect.right, rect.bottom)) {
+            blocked.right = true;
+            blocked.down = true;
+        }
+
+        blocked.none = !blocked.left && !blocked.right && !blocked.up && !blocked.down;
     }
 }
 

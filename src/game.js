@@ -1,7 +1,6 @@
 import Phaser, {Game} from 'phaser';
 import BootScene from './scenes/BootScene';
 import GameScene from './scenes/GameScene';
-import RoomScene from "./scenes/RoomScene";
 
 const canvas = document.getElementById('game-canvas');
 const config = {
@@ -12,7 +11,7 @@ const config = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: false
+            debug: true
         }
     },
     scene: [

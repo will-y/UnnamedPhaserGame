@@ -1,8 +1,8 @@
 {
   "xSize": 1381,
   "ySize": 1920,
-  "playerXStart": 400,
-  "playerYStart": 400,
+  "playerXStart": 200,
+  "playerYStart": 200,
   "requiredAssets": [
     {
       "key": "coin",

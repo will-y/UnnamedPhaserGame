@@ -18,7 +18,7 @@ class LevelBootScene extends Scene {
         this.load.json(this.key, `assets/level/${this.key}.json`);
 
         // load in common things
-        this.load.spritesheet('main-character', 'assets/sprite/main_character.png', {frameWidth: 28, frameHeight:64});
+        this.load.spritesheet('main-character', 'assets/sprite/main_character.png', {frameWidth: 28, frameHeight: 64});
 
         // load in starting room
         this.load.json(`${this.key}-start-room`, `assets/level/${this.key}-start-room.json`);
