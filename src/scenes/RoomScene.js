@@ -18,13 +18,19 @@ class RoomScene extends Scene {
         console.log(`Room Scene Created [${this.key}]`);
 
         // load in room background
-        this.add.image(0, 0, this.key).setOrigin(0, 0);
+        this.add.image(0, 0, this.key).setOrigin(0, 0).setInteractive();
+        this.input.on('gameobjectdown',this.onObjectClicked);
+        this.makeBoundryArray = [];
 
         this.cursors = this.input.keyboard.addKeys({
             up:Phaser.Input.Keyboard.KeyCodes.W,
             down:Phaser.Input.Keyboard.KeyCodes.S,
             left:Phaser.Input.Keyboard.KeyCodes.A,
             right:Phaser.Input.Keyboard.KeyCodes.D});
+
+        this.enterKey = this.input.keyboard.addKeys({
+            enter: Phaser.Input.Keyboard.KeyCodes.ENTER
+        });
 
         this.player = new Player(this, this.roomData.playerXStart, this.roomData.playerYStart, 'main-character', this.cursors);
 
@@ -85,6 +91,13 @@ class RoomScene extends Scene {
                 .strokePoints(this.boundry.points)
                 .strokeRectShape(this.playerRect);
         }
+
+        // Print array
+        if (this.enterKey.enter.isDown) {
+            this.makeBoundryArray.push(this.makeBoundryArray[0]);
+            this.makeBoundryArray.push(this.makeBoundryArray[1]);
+            console.log(this.makeBoundryArray);
+        }
     }
 
     projectRect(rect, body, time) {
@@ -119,6 +132,12 @@ class RoomScene extends Scene {
         }
 
         blocked.none = !blocked.left && !blocked.right && !blocked.up && !blocked.down;
+    }
+
+    onObjectClicked(pointer, gameObject) {
+        console.log(`${pointer.worldX}, ${pointer.worldY}`);
+        gameObject.scene.add.ellipse(pointer.worldX, pointer.worldY, 5, 5, "0xFF0000");
+        gameObject.scene.makeBoundryArray.push(pointer.worldX, pointer.worldY);
     }
 }
 
