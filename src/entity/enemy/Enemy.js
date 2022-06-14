@@ -1,11 +1,10 @@
-import Entity from "../Entity";
+import MovableEntity from "../MovableEntity";
 
-class Enemy extends Entity {
+class Enemy extends MovableEntity {
     constructor(scene, x, y, key, speed, player) {
-        super(scene, x, y, key);
+        super(scene, x, y, key, player);
 
         scene.physics.add.existing(this);
-        this.speed = speed;
         this.player = player;
         this.setUpEnemyAnimation();
     }
@@ -13,6 +12,10 @@ class Enemy extends Entity {
     setUpEnemyAnimation() {
 
     }
+
+
+    onCollide(enemy, player) {}
+
 }
 
 export default Enemy;
