@@ -3,6 +3,7 @@
   "ySize": 1920,
   "playerXStart": 200,
   "playerYStart": 200,
+  "borderArray": [80, 109, 254, 127, 425, 180, 560, 250, 674, 336, 550, 513, 325, 410, 145, 283, 100, 195, 80, 109],
   "requiredAssets": [
     {
       "key": "coin",

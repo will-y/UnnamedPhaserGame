@@ -59,7 +59,7 @@ class RoomScene extends Scene {
         // Walls
         this.debug = this.add.graphics({ lineStyle: { color: 0xffff00 } });
 
-        this.boundry = new Phaser.Geom.Polygon([80, 109, 254, 127, 425, 180, 560, 250, 674, 336, 550, 513, 325, 410, 145, 283, 100, 195, 80, 109]);
+        this.boundry = new Phaser.Geom.Polygon(this.roomData.borderArray);
 
         // Will represent the player body
         this.playerRect = new Phaser.Geom.Rectangle();
