@@ -32,7 +32,7 @@ class RoomScene extends Scene {
             enter: Phaser.Input.Keyboard.KeyCodes.ENTER
         });
 
-        this.player = new Player(this, this.roomData.playerXStart, this.roomData.playerYStart, 'main-character', 0, this.cursors);
+        this.player = new Player(this, this.roomData.playerXStart, this.roomData.playerYStart, 'main-character', 200, this.cursors);
 
         // Create Game Objects
         const gameObjects = {};
