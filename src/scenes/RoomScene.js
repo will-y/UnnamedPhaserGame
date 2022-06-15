@@ -32,7 +32,7 @@ class RoomScene extends Scene {
             enter: Phaser.Input.Keyboard.KeyCodes.ENTER
         });
 
-        this.player = new Player(this, this.roomData.playerXStart, this.roomData.playerYStart, 'main-character', 200, this.cursors);
+        this.player = new Player(this, this.roomData.playerXStart, this.roomData.playerYStart, 'main-character', 0, this.cursors);
 
         // Create Game Objects
         const gameObjects = {};
@@ -46,7 +46,7 @@ class RoomScene extends Scene {
                 if (entityGroup.type === "pickup") {
                     gameObjects[entityGroup.key].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player));
                 } else if (entityGroup.type === "enemy") {
-                    const rat = new Rat(this, instance.x, instance.y, entityGroup.key, instance.speed);
+                    const rat = new Rat(this, instance.x, instance.y, entityGroup.key, instance.speed, this.player);
                     this.entities.push(rat);
                     gameObjects[entityGroup.key].add(rat);
                 }
