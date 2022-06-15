@@ -11,6 +11,8 @@ class Enemy extends MovableEntity {
         this.player = player;
         this.updateTimer = 0;
 
+        console.log(player);
+
         this.setUpEnemyAnimation();
     }
 
@@ -19,10 +21,19 @@ class Enemy extends MovableEntity {
     }
 
 
-    onCollide(enemy, player) {}
+    onCollide(enemy, player) {
+    }
+
+    /**
+     * Gets the position of the player's feet to use for distance and tracking
+     */
+    getPlayerPosition() {
+        return [this.player.x, this.player.y + this.player.height / 2];
+    }
 
     distanceToPlayer() {
-        return Phaser.Math.Distance.Between(this.x, this.y, this.player.x, this.player.y);
+        const playerPos = this.getPlayerPosition();
+        return Phaser.Math.Distance.Between(this.x, this.y, playerPos[0], playerPos[1]);
     }
 
     updateEntity(time, delta) {
@@ -34,7 +45,8 @@ class Enemy extends MovableEntity {
                 this.velocityChanged = true;
             } else {
                 this.speed = this.maxSpeed;
-                this.direction = (Math.atan2(this.y - this.player.y, this.player.x - this.x) * 180 / Math.PI + 360) % 360;
+                const playerPos = this.getPlayerPosition();
+                this.direction = (Math.atan2(this.y - playerPos[1], playerPos[0] - this.x) * 180 / Math.PI + 360) % 360;
                 this.velocityChanged = true;
             }
         } else {
