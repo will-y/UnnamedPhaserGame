@@ -1,7 +1,7 @@
 import Enemy from "./Enemy";
 
 class Rat extends Enemy {
-    constructor(scene, x, y, key, speed, player) {
+    constructor(scene, x, y, key, speed, player, frameWidth, frameHeight) {
         super(scene, x, y, key, speed, player);
 
         this.maxSpeed = speed;
@@ -11,6 +11,9 @@ class Rat extends Enemy {
             down:Phaser.Input.Keyboard.KeyCodes.S,
             left:Phaser.Input.Keyboard.KeyCodes.A,
             right:Phaser.Input.Keyboard.KeyCodes.D});
+
+        this.hitboxWidth = this.body.width;
+        this.hitboxHeight = this.body.height;
     }
 
     setUpEnemyAnimation() {
@@ -41,21 +44,26 @@ class Rat extends Enemy {
             this.anims.play("rat_right", true);
             this.flipX = false;
             this.angle = 0;
+            this.body.setSize(this.hitboxWidth, this.hitboxHeight);
         } else if (this.direction >= 80 && this.direction <= 100) {
             // UP
             this.anims.play("rat_up", true);
             this.flipX = false;
             this.angle = 90;
+            this.body.setSize();
+            this.body.setSize(this.hitboxHeight, this.hitboxWidth);
         } else if (this.direction > 100 && this.direction < 260) {
             // LEFT
             this.anims.play("rat_right", true);
             this.flipX = true;
             this.angle = 0;
+            this.body.setSize(this.hitboxWidth, this.hitboxHeight);
         } else if (this.direction >= 260 && this.direction <= 280) {
             // DOWN
             this.anims.play("rat_up", true);
             this.flipX = false;
             this.angle = 270;
+            this.body.setSize(this.hitboxHeight, this.hitboxWidth);
         }
     }
 
