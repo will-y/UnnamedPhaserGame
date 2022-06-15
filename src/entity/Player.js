@@ -4,7 +4,6 @@ import MovableEntity from "./MovableEntity";
 class Player extends MovableEntity {
     constructor(scene, x, y, key, speed, cursors) {
         super(scene, x, y, key, speed);
-        this.maxSpeed = speed;
         this.cursors = cursors
         this.setUpPlayerAnimations();
     }

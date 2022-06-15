@@ -1,8 +1,8 @@
 import Enemy from "./Enemy";
 
 class Rat extends Enemy {
-    constructor(scene, x, y, key, speed, player, frameWidth, frameHeight) {
-        super(scene, x, y, key, speed, player);
+    constructor(scene, x, y, key, speed, player, trackRange, updateSpeed) {
+        super(scene, x, y, key, speed, player, trackRange, updateSpeed);
 
         this.hitboxWidth = this.body.width;
         this.hitboxHeight = this.body.height;

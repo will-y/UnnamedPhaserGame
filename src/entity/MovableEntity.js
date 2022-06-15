@@ -5,6 +5,7 @@ class MovableEntity extends Entity {
         super(scene, x, y, key, collideObject);
 
         this.speed = speed;
+        this.maxSpeed = speed;
         this.direction = 0;
         this.velocityChanged = true;
 
