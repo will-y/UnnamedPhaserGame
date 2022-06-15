@@ -11,8 +11,6 @@ class Enemy extends MovableEntity {
         this.player = player;
         this.updateTimer = 0;
 
-        console.log(player);
-
         this.setUpEnemyAnimation();
     }
 

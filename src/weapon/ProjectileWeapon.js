@@ -1,10 +1,10 @@
 import Weapon from "./Weapon";
 
 class ProjectileWeapon extends Weapon {
-    constructor(scene, player, projectileVelocity) {
+    constructor(scene, player, projectileSpeed, projectileKey) {
         super(scene, player);
-        this.scene = scene;
-        this.player = player;
+        this.projectileSpeed = projectileSpeed;
+        this.projectileKey = projectileKey;
     }
 
     fireWeapon() {

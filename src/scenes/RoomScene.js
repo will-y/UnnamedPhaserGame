@@ -2,6 +2,7 @@ import {Scene} from 'phaser';
 import Player from "../entity/Player";
 import Pickup from "../entity/Pickup";
 import Rat from "../entity/enemy/Rat";
+import Projectile from "../entity/projectile/Projectile";
 
 class RoomScene extends Scene {
     constructor(key, roomData) {
@@ -23,10 +24,11 @@ class RoomScene extends Scene {
         this.makeBoundryArray = [];
 
         this.cursors = this.input.keyboard.addKeys({
-            up:Phaser.Input.Keyboard.KeyCodes.W,
-            down:Phaser.Input.Keyboard.KeyCodes.S,
-            left:Phaser.Input.Keyboard.KeyCodes.A,
-            right:Phaser.Input.Keyboard.KeyCodes.D});
+            up: Phaser.Input.Keyboard.KeyCodes.W,
+            down: Phaser.Input.Keyboard.KeyCodes.S,
+            left: Phaser.Input.Keyboard.KeyCodes.A,
+            right: Phaser.Input.Keyboard.KeyCodes.D,
+            attack: Phaser.Input.Keyboard.KeyCodes.SPACE});
 
         this.enterKey = this.input.keyboard.addKeys({
             enter: Phaser.Input.Keyboard.KeyCodes.ENTER
@@ -35,20 +37,20 @@ class RoomScene extends Scene {
         this.player = new Player(this, this.roomData.playerXStart, this.roomData.playerYStart, 'main-character', 200, this.cursors);
 
         // Create Game Objects
-        const gameObjects = {};
-        this.entities = []
+        this.gameObjects = {};
+        this.entities = [];
         this.entities.push(this.player);
 
         this.roomData.entities.forEach(entityGroup => {
-            gameObjects[entityGroup.key] = this.physics.add.group();
+            this.gameObjects[entityGroup.key] = this.physics.add.group();
 
             entityGroup.instances.forEach(instance => {
                 if (entityGroup.type === "pickup") {
-                    gameObjects[entityGroup.key].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player));
+                    this.gameObjects[entityGroup.key].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player));
                 } else if (entityGroup.type === "enemy") {
                     const rat = new Rat(this, instance.x, instance.y, entityGroup.key, instance.speed, this.player, instance.trackRange, instance.updateSpeed);
                     this.entities.push(rat);
-                    gameObjects[entityGroup.key].add(rat);
+                    this.gameObjects[entityGroup.key].add(rat);
                 }
             });
         });
@@ -138,6 +140,14 @@ class RoomScene extends Scene {
         console.log(`${pointer.worldX}, ${pointer.worldY}`);
         gameObject.scene.add.ellipse(pointer.worldX, pointer.worldY, 5, 5, "0xFF0000");
         gameObject.scene.makeBoundryArray.push(pointer.worldX, pointer.worldY);
+    }
+
+    summonProjectile(x, y, key, speed, direction, friendly) {
+        // Going to need to be more than just player eventually
+        const targets = friendly ? this.gameObjects["enemy"] : this.player;
+        const projectile = new Projectile(this, x, y, key, speed, direction, targets);
+
+        this.entities.push(projectile);
     }
 }
 

@@ -1,11 +1,16 @@
 import MovableEntity from "./MovableEntity";
 
-// TODO: Abstract this animation stuff so other entities can use it
 class Player extends MovableEntity {
-    constructor(scene, x, y, key, speed, cursors) {
+    constructor(scene, x, y, key, speed, cursors, enemies, startingWeapon) {
         super(scene, x, y, key, speed, 0);
-        this.cursors = cursors
+        this.cursors = cursors;
+        this.weapon = startingWeapon;
+        this.enemies = enemies;
         this.setUpPlayerAnimations();
+
+        // Temp weapon stuff
+        this.attackCooldown = 20;
+        this.attackCooldownCounter = this.attackCooldown;
     }
 
     setUpPlayerAnimations() {
@@ -53,7 +58,17 @@ class Player extends MovableEntity {
 
 
     updateEntity(time, delta) {
-        const {left, right, up, down} = this.cursors;
+        const {left, right, up, down, attack} = this.cursors;
+
+        // Attacking
+        if (attack.isDown && this.attackCooldownCounter >= this.attackCooldown) {
+            this.attackCooldownCounter = 0;
+            this.scene.summonProjectile(this.x, this.y, "projectile-basic", 100, 0, true);
+        }
+
+        if (this.attackCooldownCounter < this.attackCooldown) {
+            this.attackCooldownCounter++;
+        }
 
         if (up.isDown && right.isDown) {
             // Up Right

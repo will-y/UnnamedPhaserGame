@@ -21,6 +21,11 @@
       "key": "level-1-start-room",
       "url": "assets/sprite/level/level-1-start-room.png",
       "type": "image"
+    },
+    {
+      "key": "projectile-basic",
+      "url": "assets/sprite/projectile/projectile_basic.png",
+      "type": "image"
     }
   ],
   "entities": [
