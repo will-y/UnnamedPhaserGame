@@ -6,7 +6,8 @@ class Pickup extends Entity {
     }
 
     onCollide(thisObject, collidingObject) {
-        thisObject.disableBody(true, true);
+        // thisObject.disableBody(true, true);
+        thisObject.destroy(true);
         //TODO: Do something with player
     }
 }

@@ -64,7 +64,7 @@
         {
           "x": 1000,
           "y": 1000,
-          "speed": 200,
+          "speed": 150,
           "trackRange": 1000,
           "updateSpeed": 20
         }

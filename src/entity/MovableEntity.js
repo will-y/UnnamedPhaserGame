@@ -1,12 +1,12 @@
 import Entity from "./Entity";
 
 class MovableEntity extends Entity {
-    constructor(scene, x, y, key, speed, collideObject) {
+    constructor(scene, x, y, key, speed, initialDirection, collideObject) {
         super(scene, x, y, key, collideObject);
 
         this.speed = speed;
         this.maxSpeed = speed;
-        this.direction = 0;
+        this.direction = initialDirection;
         this.velocityChanged = true;
 
         scene.physics.add.existing(this);

@@ -3,7 +3,7 @@ import MovableEntity from "./MovableEntity";
 // TODO: Abstract this animation stuff so other entities can use it
 class Player extends MovableEntity {
     constructor(scene, x, y, key, speed, cursors) {
-        super(scene, x, y, key, speed);
+        super(scene, x, y, key, speed, 0);
         this.cursors = cursors
         this.setUpPlayerAnimations();
     }

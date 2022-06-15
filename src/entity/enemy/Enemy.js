@@ -2,7 +2,7 @@ import MovableEntity from "../MovableEntity";
 
 class Enemy extends MovableEntity {
     constructor(scene, x, y, key, speed, player, trackRange, updateSpeed) {
-        super(scene, x, y, key, speed, player);
+        super(scene, x, y, key, speed, 0, player);
 
         // How far away can the enemy see the player
         this.trackRange = trackRange;
