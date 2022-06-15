@@ -42,15 +42,15 @@ class RoomScene extends Scene {
         this.entities.push(this.player);
 
         this.roomData.entities.forEach(entityGroup => {
-            this.gameObjects[entityGroup.key] = this.physics.add.group();
+            this.gameObjects[entityGroup.type] = this.physics.add.group();
 
             entityGroup.instances.forEach(instance => {
                 if (entityGroup.type === "pickup") {
-                    this.gameObjects[entityGroup.key].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player));
+                    this.gameObjects[entityGroup.type].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player));
                 } else if (entityGroup.type === "enemy") {
                     const rat = new Rat(this, instance.x, instance.y, entityGroup.key, instance.speed, this.player, instance.trackRange, instance.updateSpeed);
                     this.entities.push(rat);
-                    this.gameObjects[entityGroup.key].add(rat);
+                    this.gameObjects[entityGroup.type].add(rat);
                 }
             });
         });

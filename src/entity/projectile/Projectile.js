@@ -5,7 +5,7 @@ class Projectile extends MovableEntity {
         super(scene, x, y, key, speed, direction);
         this.targets = targets;
 
-        scene.physics.add.collider(this, targets);
+        scene.physics.overlap(this, targets, this.onHit);
     }
 
     onHit(projectile, target) {
