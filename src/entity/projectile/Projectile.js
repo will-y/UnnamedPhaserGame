@@ -1,11 +1,11 @@
 import MovableEntity from "../MovableEntity";
 
 class Projectile extends MovableEntity {
-    constructor(scene, x, y, key, speed, direction, source, targets, damage) {
+    constructor(scene, x, y, key, speed, direction, source, targets, damage, life) {
         super(scene, x, y, key, speed, direction);
-        this.targets = targets;
         this.damageAmount = damage;
         this.source = source;
+        this.life = life;
         scene.physics.add.overlap(this, targets, this.onHit);
         this.setVelocityBasedOffSource();
     }
@@ -36,6 +36,10 @@ class Projectile extends MovableEntity {
     }
 
     updateEntity(time, delta) {
+        this.life--;
+        if (this.life <= 0) {
+            this.destroy(true);
+        }
         super.updateEntity(time, delta);
     }
 }

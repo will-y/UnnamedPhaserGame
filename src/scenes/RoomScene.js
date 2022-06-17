@@ -146,7 +146,7 @@ class RoomScene extends Scene {
     summonProjectile(x, y, key, speed, direction, source, friendly, damage) {
         // Going to need to be more than just player eventually
         const targets = friendly ? this.gameObjects["enemy"] : this.player;
-        const projectile = new Projectile(this, x, y, key, speed, direction, source, targets, damage);
+        const projectile = new Projectile(this, x, y, key, speed, direction, source, targets, damage, 500);
 
         this.entities.push(projectile);
     }
