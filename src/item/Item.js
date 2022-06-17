@@ -7,5 +7,20 @@
  * Items are the things that are stored in the inventory
  */
 class Item {
+    /**
+     *
+     * @param key - key for item sprite (for inventory and ground if a pickup)
+     */
+    constructor(key) {
+        this.key = key;
+    }
 
+    /**
+     * Function for item use effect
+     * Can be when used from inventory (health potion)
+     * Also weapon effects are here
+     */
+    useItem() {
+
+    }
 }
