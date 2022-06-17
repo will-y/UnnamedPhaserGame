@@ -46,7 +46,7 @@ class RoomScene extends Scene {
 
             entityGroup.instances.forEach(instance => {
                 if (entityGroup.type === "pickup") {
-                    this.gameObjects[entityGroup.type].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player));
+                    this.gameObjects[entityGroup.type].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player, instance.quantity));
                 } else if (entityGroup.type === "enemy") {
                     const rat = new Rat(this, instance.x, instance.y, entityGroup.key, instance.speed, this.player, instance.trackRange, instance.updateSpeed, instance.health);
                     this.entities.push(rat);

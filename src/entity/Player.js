@@ -1,4 +1,5 @@
 import LivingEntity from "./LivingEntity";
+import Inventory from "../item/Inventory";
 
 class Player extends LivingEntity {
     constructor(scene, x, y, key, speed, cursors, enemies, startingWeapon) {

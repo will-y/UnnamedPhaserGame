@@ -1,14 +1,19 @@
 import Entity from "./Entity";
+import ItemRegistry from "../item/ItemRegistry";
 
 class Pickup extends Entity {
-    constructor(scene, x, y, key, player) {
+    constructor(scene, x, y, key, player, quantity) {
         super(scene, x, y, key, player);
+
+        // Get the item that this pickup is an instance of
+        this.item = ItemRegistry.getItem(key);
+        this.quantity = quantity;
     }
 
-    onCollide(thisObject, collidingObject) {
+    onCollide(pickup, player) {
         // thisObject.disableBody(true, true);
-        thisObject.destroy(true);
-        //TODO: Do something with player
+        pickup.destroy(true);
+        player.inventory.addItem(pickup.item, pickup.quantity);
     }
 }
 

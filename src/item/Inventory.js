@@ -38,6 +38,25 @@ class Inventory {
     }
 
     /**
+     * Adds any item to the inventory, automatically determining which list to put it in based off type
+     * @param item - the item to add
+     * @param quantity - the quantity to add
+     */
+    addItem(item, quantity=1) {
+        const type = item.type;
+
+        if (type === "primary") {
+            this.addPrimaryWeapon(item);
+        } else if (type === "passive") {
+            this.addPassiveWeapon(item);
+        } else if (type === "consumable") {
+            this.addConsumable(item, quantity)
+        } else if (type === "other") {
+            this.addOtherItem(item, quantity);
+        }
+    }
+
+    /**
      * Adds the given item to the given list
      * Compares names to add it correctly.
      * If already in either add or ignore
@@ -61,5 +80,6 @@ class Inventory {
             }
         }
     }
-
 }
+
+export default Inventory;

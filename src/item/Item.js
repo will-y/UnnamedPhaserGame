@@ -12,9 +12,11 @@ class Item {
     /**
      *
      * @param key - key for item sprite (for inventory and ground if a pickup), also used as itemID
+     * @param type - the type of this item. See {@link getType}
      */
-    constructor(key) {
+    constructor(key, type) {
         this.key = key;
+        this.type = type;
     }
 
     /**
@@ -25,4 +27,17 @@ class Item {
     useItem() {
 
     }
+
+    /**
+     * Gets the type of this item, should be one of the following;
+     *   Primary
+     *   Passive
+     *   Consumable
+     *   Other
+     */
+    getType() {
+
+    }
 }
+
+export default Item;

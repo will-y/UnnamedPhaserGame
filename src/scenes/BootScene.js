@@ -1,5 +1,7 @@
 import {Scene} from 'phaser';
 import LevelBootScene from "./LevelBootScene";
+import ItemRegistry from"../item/ItemRegistry";
+import Item from "../item/Item";
 
 class BootScene extends Scene {
     constructor() {
@@ -8,6 +10,9 @@ class BootScene extends Scene {
 
     preload() {
         this.game.scene.add('level-1', new LevelBootScene('level-1'));
+
+        // Register Items (Maybe make this JSON later)
+        ItemRegistry.register(new Item("coin", "other"));
     }
 
     create() {

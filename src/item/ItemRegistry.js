@@ -7,14 +7,15 @@ class ItemRegistry {
 
     /**
      * Registers an item class
-     * @param key - registration key of the item
      * @param item - instantiated item class
      */
-    static register(key, item) {
-        this.items[key] = item;
+    static register(item) {
+        this.items[item.key] = item;
     }
 
     static getItem(key) {
         return this.items[key];
     }
 }
+
+export default ItemRegistry;
