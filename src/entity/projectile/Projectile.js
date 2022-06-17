@@ -11,10 +11,13 @@ class Projectile extends MovableEntity {
     }
 
     onHit(projectile, target) {
-        projectile.destroy(true);
+        // Needed if collides with two enemies in the same frame
+        if (projectile.scene) {
+            if (target.canDamage()) {
+                target.damage(projectile.damageAmount);
+            }
 
-        if (target.canDamage()) {
-            target.damage(this.damageAmount);
+            projectile.destroy(true);
         }
     }
 

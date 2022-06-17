@@ -48,7 +48,7 @@ class RoomScene extends Scene {
                 if (entityGroup.type === "pickup") {
                     this.gameObjects[entityGroup.type].add(new Pickup(this, instance.x, instance.y, entityGroup.key, this.player));
                 } else if (entityGroup.type === "enemy") {
-                    const rat = new Rat(this, instance.x, instance.y, entityGroup.key, instance.speed, this.player, instance.trackRange, instance.updateSpeed);
+                    const rat = new Rat(this, instance.x, instance.y, entityGroup.key, instance.speed, this.player, instance.trackRange, instance.updateSpeed, instance.health);
                     this.entities.push(rat);
                     this.gameObjects[entityGroup.type].add(rat);
                 }
@@ -142,10 +142,10 @@ class RoomScene extends Scene {
         gameObject.scene.makeBoundryArray.push(pointer.worldX, pointer.worldY);
     }
 
-    summonProjectile(x, y, key, speed, direction, source, friendly) {
+    summonProjectile(x, y, key, speed, direction, source, friendly, damage) {
         // Going to need to be more than just player eventually
         const targets = friendly ? this.gameObjects["enemy"] : this.player;
-        const projectile = new Projectile(this, x, y, key, speed, direction, source, targets);
+        const projectile = new Projectile(this, x, y, key, speed, direction, source, targets, damage);
 
         this.entities.push(projectile);
     }

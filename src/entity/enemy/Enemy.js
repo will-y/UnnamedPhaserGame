@@ -1,8 +1,8 @@
 import LivingEntity from "../LivingEntity";
 
 class Enemy extends LivingEntity {
-    constructor(scene, x, y, key, speed, player, trackRange, updateSpeed) {
-        super(scene, x, y, key, speed, 0, player);
+    constructor(scene, x, y, key, speed, player, trackRange, updateSpeed, health) {
+        super(scene, x, y, key, speed, 0, health, player);
 
         // How far away can the enemy see the player
         this.trackRange = trackRange;

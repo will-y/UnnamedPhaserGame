@@ -64,14 +64,16 @@
           "y": 250,
           "speed": 100,
           "trackRange": 500,
-          "updateSpeed": 10
+          "updateSpeed": 10,
+          "health": 40
         },
         {
           "x": 1000,
           "y": 1000,
           "speed": 150,
           "trackRange": 1000,
-          "updateSpeed": 20
+          "updateSpeed": 20,
+          "health": 40
         }
       ]
     }

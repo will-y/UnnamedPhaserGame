@@ -2,7 +2,7 @@ import LivingEntity from "./LivingEntity";
 
 class Player extends LivingEntity {
     constructor(scene, x, y, key, speed, cursors, enemies, startingWeapon) {
-        super(scene, x, y, key, speed, 0);
+        super(scene, x, y, key, speed, 0, 100);
         this.cursors = cursors;
         this.weapon = startingWeapon;
         this.enemies = enemies;
@@ -65,7 +65,7 @@ class Player extends LivingEntity {
             this.attackCooldownCounter = 0;
             const mouse = this.scene.game.input.mousePointer;
             const angle = (Math.atan2(-(mouse.worldY - this.y), mouse.worldX - this.x) * 180 / Math.PI + 360) % 360;
-            this.scene.summonProjectile(this.x, this.y, "projectile-basic", 100, angle, this, true);
+            this.scene.summonProjectile(this.x, this.y, "projectile-basic", 100, angle, this, true, 20);
         }
 
         if (this.attackCooldownCounter < this.attackCooldown) {

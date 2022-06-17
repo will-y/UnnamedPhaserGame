@@ -35,10 +35,6 @@ class MovableEntity extends Entity {
 
         return [dx, dy];
     }
-
-    canDamage() {
-        return true;
-    }
 }
 
 export default MovableEntity;

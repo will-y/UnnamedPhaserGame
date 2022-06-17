@@ -29,7 +29,7 @@ class Entity extends Phaser.Physics.Arcade.Sprite {
     /**
      * Damages this entity (if applicable) call canDamage first
      */
-    damage() {
+    damage(amount) {
 
     }
 
