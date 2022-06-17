@@ -5,6 +5,8 @@
  * That will normally be a pickup entity
  * Not all items need an item entity
  * Items are the things that are stored in the inventory
+ * In theory should only need one item instance per item type
+ * At minimum one per scene?
  */
 class Item {
     /**
