@@ -5,7 +5,9 @@ class Player extends LivingEntity {
         super(scene, x, y, key, speed, 0, 100);
         this.cursors = cursors;
         this.weapon = startingWeapon;
+        // Don't remember why I thought I needed this?
         this.enemies = enemies;
+        this.inventory = new Inventory();
         this.setUpPlayerAnimations();
 
         // Temp weapon stuff
