@@ -11,7 +11,6 @@ class Pickup extends Entity {
     }
 
     onCollide(pickup, player) {
-        // thisObject.disableBody(true, true);
         pickup.destroy(true);
         player.inventory.addItem(pickup.item, pickup.quantity);
     }

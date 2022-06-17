@@ -61,7 +61,7 @@ class Player extends LivingEntity {
 
 
     updateEntity(time, delta) {
-        const {left, right, up, down, attack} = this.cursors;
+        const {left, right, up, down, attack, inventory} = this.cursors;
 
         // Attacking
         if (attack.isDown && this.attackCooldownCounter >= this.attackCooldown) {
@@ -75,6 +75,12 @@ class Player extends LivingEntity {
             this.attackCooldownCounter++;
         }
 
+        // Inventory
+        if (inventory.isDown) {
+            console.log(this.inventory);
+        }
+
+        // Movement
         if (up.isDown && right.isDown) {
             // Up Right
             this.direction = 45;

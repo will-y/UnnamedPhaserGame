@@ -12,6 +12,7 @@ class BootScene extends Scene {
         this.game.scene.add('level-1', new LevelBootScene('level-1'));
 
         // Register Items (Maybe make this JSON later)
+        // Maybe do the same thing with entities later
         ItemRegistry.register(new Item("coin", "other"));
     }
 
