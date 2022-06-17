@@ -63,7 +63,9 @@ class Player extends MovableEntity {
         // Attacking
         if (attack.isDown && this.attackCooldownCounter >= this.attackCooldown) {
             this.attackCooldownCounter = 0;
-            this.scene.summonProjectile(this.x, this.y, "projectile-basic", 100, 0, this, true);
+            const mouse = this.scene.game.input.mousePointer;
+            const angle = (Math.atan2(-(mouse.worldY - this.y), mouse.worldX - this.x) * 180 / Math.PI + 360) % 360;
+            this.scene.summonProjectile(this.x, this.y, "projectile-basic", 100, angle, this, true);
         }
 
         if (this.attackCooldownCounter < this.attackCooldown) {

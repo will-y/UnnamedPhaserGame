@@ -27,11 +27,8 @@ class Projectile extends MovableEntity {
         velocity[0] = velocity[0] + sourceVelocity.x;
         velocity[1] = velocity[1] + sourceVelocity.y;
 
-        console.log(velocity);
-
         this.speed = Math.sqrt(velocity[0]**2 + velocity[1]**2);
         this.direction = Math.atan2(-velocity[1], velocity[0]) * 180 / Math.PI;
-        console.log(this.speed);
         this.velocityChanged = true;
     }
 
