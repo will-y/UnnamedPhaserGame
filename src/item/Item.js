@@ -11,7 +11,7 @@
 class Item {
     /**
      *
-     * @param key - key for item sprite (for inventory and ground if a pickup)
+     * @param key - key for item sprite (for inventory and ground if a pickup), also used as itemID
      */
     constructor(key) {
         this.key = key;
