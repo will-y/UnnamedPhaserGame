@@ -38,13 +38,6 @@ class Projectile extends MovableEntity {
     updateEntity(time, delta) {
         super.updateEntity(time, delta);
     }
-
-    destroy(fromScene) {
-        this.scene.entities = this.scene.entities.filter(x => {
-            return !(x.x === this.x && x.y === this.y);
-        });
-        super.destroy(fromScene);
-    }
 }
 
 export default Projectile;

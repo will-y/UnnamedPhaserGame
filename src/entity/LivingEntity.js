@@ -13,6 +13,17 @@ class LivingEntity extends MovableEntity {
 
     damage(amount) {
         this.health -= amount;
+        if (this.health <= 0) {
+            this.kill();
+        }
+    }
+
+    /**
+     * Kill this living entity
+     * Implementation up to subclasses (Player different from enemies)
+     */
+    kill() {
+
     }
 }
 

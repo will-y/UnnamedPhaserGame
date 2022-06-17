@@ -52,6 +52,10 @@ class Enemy extends LivingEntity {
         }
         super.updateEntity(time, delta);
     }
+
+    kill() {
+        this.destroy(true);
+    }
 }
 
 export default Enemy;
