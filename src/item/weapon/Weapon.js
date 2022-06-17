@@ -1,11 +1,9 @@
-// IDK the common things yet
-class Weapon {
-    constructor(scene, player) {
-        this.scene = scene;
-        this.player = player;
+class Weapon extends Item {
+    constructor(key) {
+        super(key);
     }
 
-    fireWeapon() {
+    useItem() {
 
     }
 }
