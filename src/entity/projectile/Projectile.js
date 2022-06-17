@@ -1,34 +1,48 @@
 import MovableEntity from "../MovableEntity";
 
 class Projectile extends MovableEntity {
-    constructor(scene, x, y, key, speed, direction, targets) {
+    constructor(scene, x, y, key, speed, direction, source, targets, damage) {
         super(scene, x, y, key, speed, direction);
         this.targets = targets;
+        this.damageAmount = damage;
+        this.source = source;
         scene.physics.add.overlap(this, targets, this.onHit);
+        this.setVelocityBasedOffSource();
     }
 
     onHit(projectile, target) {
-        console.log("HIT " + target.key + " With " + projectile.key);
         projectile.destroy(true);
+
+        if (target.canDamage()) {
+            target.damage(this.damageAmount);
+        }
+    }
+
+    /**
+     * Takes in initial velocity and then adds the source's velocity to it
+     */
+    setVelocityBasedOffSource() {
+        const velocity = this.getVelocityFromDirection();
+        const sourceVelocity = this.source.body.velocity;
+        velocity[0] = velocity[0] + sourceVelocity.x;
+        velocity[1] = velocity[1] + sourceVelocity.y;
+
+        console.log(velocity);
+
+        this.speed = Math.sqrt(velocity[0]**2 + velocity[1]**2);
+        this.direction = Math.atan2(-velocity[1], velocity[0]) * 180 / Math.PI;
+        console.log(this.speed);
+        this.velocityChanged = true;
     }
 
     updateEntity(time, delta) {
-
         super.updateEntity(time, delta);
     }
 
     destroy(fromScene) {
-        // console.log(this.scene.entities);
         this.scene.entities = this.scene.entities.filter(x => {
-            const res = !(x.x === this.x && x.y === this.y);
-            // console.log(x.key + ":");
-            // console.log(x.x, this.x, x.y, this.y, res);
-            // if (res) {
-            //     console.log(x);
-            // }
-            return res;
+            return !(x.x === this.x && x.y === this.y);
         });
-        // console.log(this.scene.entities);
         super.destroy(fromScene);
     }
 }

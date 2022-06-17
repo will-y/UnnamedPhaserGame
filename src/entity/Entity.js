@@ -25,6 +25,17 @@ class Entity extends Phaser.Physics.Arcade.Sprite {
         // by default don't need to do anything
         console.log("Actually here");
     }
+
+    /**
+     * Damages this entity (if applicable) call canDamage first
+     */
+    damage() {
+
+    }
+
+    canDamage() {
+        return false;
+    }
 }
 
 export default Entity;

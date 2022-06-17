@@ -23,16 +23,21 @@ class MovableEntity extends Entity {
     updateEntity(time, delta) {
         if (this.velocityChanged) {
             this.playMoveAnimation();
-            this.setVelocityFromDirection();
+            const velocity = this.getVelocityFromDirection();
+            this.setVelocity(velocity[0], velocity[1]);
             this.velocityChanged = false;
         }
     }
 
-    setVelocityFromDirection() {
+    getVelocityFromDirection() {
         const dx = Math.cos(this.direction * Math.PI / 180.0) * this.speed;
         const dy = -Math.sin(this.direction * Math.PI / 180.0) * this.speed;
 
-        this.setVelocity(dx, dy);
+        return [dx, dy];
+    }
+
+    canDamage() {
+        return true;
     }
 }
 

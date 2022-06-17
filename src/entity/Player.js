@@ -63,7 +63,7 @@ class Player extends MovableEntity {
         // Attacking
         if (attack.isDown && this.attackCooldownCounter >= this.attackCooldown) {
             this.attackCooldownCounter = 0;
-            this.scene.summonProjectile(this.x, this.y, "projectile-basic", 100, 0, true);
+            this.scene.summonProjectile(this.x, this.y, "projectile-basic", 100, 0, this, true);
         }
 
         if (this.attackCooldownCounter < this.attackCooldown) {
