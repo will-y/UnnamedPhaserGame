@@ -1,6 +1,6 @@
-import MovableEntity from "./MovableEntity";
+import LivingEntity from "./LivingEntity";
 
-class Player extends MovableEntity {
+class Player extends LivingEntity {
     constructor(scene, x, y, key, speed, cursors, enemies, startingWeapon) {
         super(scene, x, y, key, speed, 0);
         this.cursors = cursors;

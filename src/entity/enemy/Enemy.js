@@ -1,6 +1,6 @@
-import MovableEntity from "../MovableEntity";
+import LivingEntity from "../LivingEntity";
 
-class Enemy extends MovableEntity {
+class Enemy extends LivingEntity {
     constructor(scene, x, y, key, speed, player, trackRange, updateSpeed) {
         super(scene, x, y, key, speed, 0, player);
 
