@@ -9,6 +9,7 @@ class Boundary extends Phaser.GameObjects.Image {
 
         // Walls
         this.debug = this.scene.add.graphics({ lineStyle: { color: 0xffff00 } });
+        this.debug.depth = 1;
         console.log(this.debug)
 
         this.boundary = new Phaser.Geom.Polygon(path);
