@@ -39,7 +39,7 @@ class Entity extends Phaser.Physics.Arcade.Sprite {
 
     destroy(fromScene) {
         this.scene.entities = this.scene.entities.filter(x => {
-            return !(x.x === this.x && x.y === this.y);
+            return !(x === this);
         });
         super.destroy(fromScene);
     }

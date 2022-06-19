@@ -79,6 +79,54 @@
           "trackRange": 1000,
           "updateSpeed": 20,
           "health": 40
+        },
+        {
+          "x": 500,
+          "y": 500,
+          "speed": 144,
+          "trackRange": 1000,
+          "updateSpeed": 20,
+          "health": 80
+        },
+        {
+          "x": 500,
+          "y": 500,
+          "speed": 145,
+          "trackRange": 1000,
+          "updateSpeed": 20,
+          "health": 80
+        },
+        {
+          "x": 500,
+          "y": 500,
+          "speed": 146,
+          "trackRange": 1000,
+          "updateSpeed": 20,
+          "health": 80
+        },
+        {
+          "x": 500,
+          "y": 500,
+          "speed": 147,
+          "trackRange": 1000,
+          "updateSpeed": 20,
+          "health": 80
+        },
+        {
+          "x": 500,
+          "y": 500,
+          "speed": 148,
+          "trackRange": 1000,
+          "updateSpeed": 20,
+          "health": 80
+        },
+        {
+          "x": 500,
+          "y": 500,
+          "speed": 149,
+          "trackRange": 1000,
+          "updateSpeed": 20,
+          "health": 80
         }
       ]
     }
