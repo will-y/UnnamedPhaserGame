@@ -3,6 +3,7 @@ import Player from "../entity/Player";
 import Pickup from "../entity/Pickup";
 import Rat from "../entity/enemy/Rat";
 import Projectile from "../entity/projectile/Projectile";
+import Boundary from "../physics/Boundary";
 
 class RoomScene extends Scene {
     constructor(key, roomData) {
@@ -19,7 +20,8 @@ class RoomScene extends Scene {
         console.log(`Room Scene Created [${this.key}]`);
 
         // load in room background
-        this.add.image(0, 0, this.key).setOrigin(0, 0).setInteractive();
+        const backgroundImage = new Boundary(this, 0, 0, this.key).setOrigin(0, 0).setInteractive();
+        this.add.existing(backgroundImage);
         this.input.on('gameobjectdown',this.onObjectClicked);
         this.makeBoundryArray = [];
 
