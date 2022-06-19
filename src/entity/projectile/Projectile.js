@@ -42,6 +42,11 @@ class Projectile extends MovableEntity {
         }
         super.updateEntity(time, delta);
     }
+
+    onBoundaryCollide() {
+        this.destroy(true);
+        return true;
+    }
 }
 
 export default Projectile;

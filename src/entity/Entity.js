@@ -51,7 +51,7 @@ class Entity extends Phaser.Physics.Arcade.Sprite {
      * Return false to make the boundary block the entity's movement
      */
     onBoundaryCollide() {
-
+        return false;
     }
 }
 

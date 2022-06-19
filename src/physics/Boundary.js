@@ -10,7 +10,6 @@ class Boundary extends Phaser.GameObjects.Image {
         // Walls
         this.debug = this.scene.add.graphics({ lineStyle: { color: 0xffff00 } });
         this.debug.depth = 1;
-        console.log(this.debug)
 
         this.boundary = new Phaser.Geom.Polygon(path);
 
@@ -35,9 +34,13 @@ class Boundary extends Phaser.GameObjects.Image {
 
                 this.projectRect(this.bodyRect, body, 1 / this.scene.physics.world.fps);
 
-                this.setBlocked(body.blocked, this.bodyRect, this.boundary);
+                const blocked = !this.setBlocked(body.blocked, this.bodyRect, this.boundary);
 
-                this.clampVelocity(body.velocity, body.blocked);
+                if (blocked) {
+                    if (!entity.onBoundaryCollide()) {
+                        this.clampVelocity(body.velocity, body.blocked);
+                    }
+                }
             }
         });
 
@@ -80,6 +83,7 @@ class Boundary extends Phaser.GameObjects.Image {
         }
 
         blocked.none = !blocked.left && !blocked.right && !blocked.up && !blocked.down;
+        return blocked.none;
     }
 }
 
