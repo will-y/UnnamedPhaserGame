@@ -20,8 +20,8 @@ class RoomScene extends Scene {
         console.log(`Room Scene Created [${this.key}]`);
 
         // load in room background
-        const backgroundImage = new Boundary(this, 0, 0, this.key).setOrigin(0, 0).setInteractive();
-        this.add.existing(backgroundImage);
+        this.background = new Boundary(this, 0, 0, this.key, this.roomData.borderArray).setOrigin(0, 0).setInteractive();
+        this.add.existing(this.background);
         this.input.on('gameobjectdown',this.onObjectClicked);
         this.makeBoundryArray = [];
 
@@ -60,17 +60,6 @@ class RoomScene extends Scene {
 
         // Camera things
         this.cameras.main.startFollow(this.player);
-
-        // Walls
-        this.debug = this.add.graphics({ lineStyle: { color: 0xffff00 } });
-
-        this.boundry = new Phaser.Geom.Polygon(this.roomData.borderArray);
-
-        // Will represent the player body
-        this.playerRect = new Phaser.Geom.Rectangle();
-
-        // Will hold a per-step velocity (distance)
-        this.tempVelocity = new Phaser.Math.Vector2();
     }
 
     update(time, delta) {
@@ -78,24 +67,8 @@ class RoomScene extends Scene {
             entity.updateEntity(time, delta);
         });
 
-        const body = this.player.body;
-
-        // Move the player rectangle ahead by one step of the provisional velocity
-        this.projectRect(this.playerRect, body, 1 / this.physics.world.fps);
-
-        // Check if the player rectangle is within the polygon and "block" the body on any corresponding axes
-        this.setBlocked(body.blocked, this.playerRect, this.boundry);
-
-        // Limit the provisional velocity based on the blocked axes
-        this.clampVelocity(body.velocity, body.blocked);
-
-        // Draw the polygons
-        if (this.physics.world.drawDebug) {
-            this.debug
-                .clear()
-                .strokePoints(this.boundry.points)
-                .strokeRectShape(this.playerRect);
-        }
+        // update boundary
+        this.background.updateBoundary(time, delta, this.entities);
 
         // Print array
         if (this.enterKey.enter.isDown) {
@@ -103,40 +76,6 @@ class RoomScene extends Scene {
             this.makeBoundryArray.push(this.makeBoundryArray[1]);
             console.log(this.makeBoundryArray);
         }
-    }
-
-    projectRect(rect, body, time) {
-        this.tempVelocity.copy(body.velocity).scale(time);
-        Phaser.Geom.Rectangle.CopyFrom(body, rect);
-        Phaser.Geom.Rectangle.OffsetPoint(rect, this.tempVelocity);
-    }
-
-    clampVelocity(velocity, blocked) {
-        if (blocked.left) velocity.x = Phaser.Math.Clamp(velocity.x, 0, Infinity);
-        if (blocked.right) velocity.x = Phaser.Math.Clamp(velocity.x, -Infinity, 0);
-        if (blocked.up) velocity.y = Phaser.Math.Clamp(velocity.y, 0, Infinity);
-        if (blocked.down) velocity.y = Phaser.Math.Clamp(velocity.y, -Infinity, 0);
-    }
-
-    setBlocked(blocked, rect, bounds) {
-        if (!bounds.contains(rect.left, rect.top)) {
-            blocked.left = true;
-            blocked.up = true;
-        }
-        if (!bounds.contains(rect.left, rect.bottom)) {
-            blocked.left = true;
-            blocked.down = true;
-        }
-        if (!bounds.contains(rect.right, rect.top)) {
-            blocked.right = true;
-            blocked.up = true;
-        }
-        if (!bounds.contains(rect.right, rect.bottom)) {
-            blocked.right = true;
-            blocked.down = true;
-        }
-
-        blocked.none = !blocked.left && !blocked.right && !blocked.up && !blocked.down;
     }
 
     onObjectClicked(pointer, gameObject) {

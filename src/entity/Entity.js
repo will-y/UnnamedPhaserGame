@@ -43,6 +43,16 @@ class Entity extends Phaser.Physics.Arcade.Sprite {
         });
         super.destroy(fromScene);
     }
+
+    /**
+     * Called by the boundary when the entity collides with it
+     * The default behavior will be to block the entity's movement
+     * Return true to make the boundary do nothing
+     * Return false to make the boundary block the entity's movement
+     */
+    onBoundaryCollide() {
+
+    }
 }
 
 export default Entity;
