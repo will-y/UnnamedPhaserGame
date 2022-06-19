@@ -39,12 +39,12 @@ class Enemy extends LivingEntity {
             this.updateTimer = 0;
             const playerDistance = this.distanceToPlayer();
             if (playerDistance > this.trackRange) {
+                this.velocityChanged = this.speed !== 0;
                 this.speed = 0;
-                this.velocityChanged = true;
             } else {
-                this.speed = this.maxSpeed;
+                this.speed = this.maxSpeed + Math.random() * 10 - 5;
                 const playerPos = this.getPlayerPosition();
-                this.direction = (Math.atan2(this.y - playerPos[1], playerPos[0] - this.x) * 180 / Math.PI + 360) % 360;
+                this.direction = (Math.atan2(this.y - playerPos[1], playerPos[0] - this.x) * 180 / Math.PI + 360) % 360 + Math.random() * 10 - 5;
                 this.velocityChanged = true;
             }
         } else {
