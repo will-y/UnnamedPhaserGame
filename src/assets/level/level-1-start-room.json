@@ -31,6 +31,11 @@
       "key": "sword",
       "url": "assets/sprite/weapon/sword.png",
       "type": "image"
+    },
+    {
+      "key": "gun",
+      "url": "assets/sprite/weapon/gun.png",
+      "type": "image"
     }
   ],
   "entities": [
@@ -41,6 +46,16 @@
         {
           "x": 400,
           "y": 800
+        }
+      ]
+    },
+    {
+      "key": "gun",
+      "type": "pickup",
+      "instances": [
+        {
+          "x": 600,
+          "y": 1000
         }
       ]
     },
