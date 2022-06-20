@@ -14,6 +14,7 @@ class BootScene extends Scene {
         // Register Items (Maybe make this JSON later)
         // Maybe do the same thing with entities later
         ItemRegistry.register(new Item("coin", "other"));
+        ItemRegistry.register(new Item("sword", "primary"));
     }
 
     create() {
