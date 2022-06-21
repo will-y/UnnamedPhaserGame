@@ -11,9 +11,6 @@ class Player extends LivingEntity {
         this.activeWeapon = -1;
         this.setUpPlayerAnimations();
 
-        // Temp weapon stuff
-        this.attackCooldown = 20;
-        this.attackCooldownCounter = this.attackCooldown;
     }
 
     setUpPlayerAnimations() {
@@ -63,27 +60,27 @@ class Player extends LivingEntity {
     updateEntity(time, delta) {
         const {left, right, up, down, attack, inventory, weapon1, weapon2, weapon3, weapon4} = this.cursors;
 
-        // Attacking
-        if (attack.isDown && this.attackCooldownCounter >= this.attackCooldown) {
-            this.attackCooldownCounter = 0;
-            const mouse = this.scene.game.input.mousePointer;
-            const angle = (Math.atan2(-(mouse.worldY - this.y), mouse.worldX - this.x) * 180 / Math.PI + 360) % 360;
-            this.scene.summonProjectile(this.x, this.y, "projectile-basic", 100, angle, this, true, 20);
-        }
+        if (attack.isDown) {
+            const weapon = this.inventory.getWeapon(this.activeWeapon);
 
-        if (this.attackCooldownCounter < this.attackCooldown) {
-            this.attackCooldownCounter++;
+            if (weapon) {
+                weapon.useItem(this);
+            }
         }
 
         // Weapon Changing
         if (weapon1.isDown) {
             this.activeWeapon = 0;
+            console.log("Weapon changed to 1");
         } else if (weapon2.isDown) {
             this.activeWeapon = 1;
+            console.log("Weapon changed to 2");
         } else if (weapon3.isDown) {
             this.activeWeapon = 2;
+            console.log("Weapon changed to 3");
         } else if (weapon4.isDown) {
             this.activeWeapon = 3;
+            console.log("Weapon changed to 4");
         }
 
         // Inventory

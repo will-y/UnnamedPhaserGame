@@ -1,10 +1,12 @@
+import Item from "../Item";
+
 class Weapon extends Item {
-    constructor(key) {
-        super(key);
+    constructor(key, type) {
+        super(key, type);
     }
 
-    useItem() {
-
+    useItem(scene, x, y) {
+        console.log("Sword used");
     }
 }
 

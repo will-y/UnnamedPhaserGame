@@ -86,12 +86,14 @@ class Inventory {
      * Returns null if slot > 3 or no weapon in that slot
      */
     getWeapon(slot) {
-        const values = this.weapons.values();
-        if (slot < 0 || slot > 3 || slot > values.length()) {
-            return values[slot];
-        } else {
-            return null;
+        const values = Object.values(this.weapons);
+        if (!(slot < 0 || slot > 3 || slot > values.length)) {
+            if (values[slot]) {
+                return values[slot].item;
+            }
         }
+
+        return null;
     }
 }
 
