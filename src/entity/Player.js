@@ -2,13 +2,13 @@ import LivingEntity from "./LivingEntity";
 import Inventory from "../item/Inventory";
 
 class Player extends LivingEntity {
-    constructor(scene, x, y, key, speed, cursors, enemies, startingWeapon) {
+    constructor(scene, x, y, key, speed, cursors, enemies) {
         super(scene, x, y, key, speed, 0, 100);
         this.cursors = cursors;
-        this.weapon = startingWeapon;
         // Don't remember why I thought I needed this?
         this.enemies = enemies;
         this.inventory = new Inventory();
+        this.activeWeapon = "";
         this.setUpPlayerAnimations();
 
         // Temp weapon stuff

@@ -75,9 +75,22 @@ class Inventory {
             }
         } else {
             list[key] = {
-                id: key,
+                item: item,
                 quantity: quantity
             }
+        }
+    }
+
+    /**
+     * Gets the weapon in the slot
+     * Returns null if slot > 3 or no weapon in that slot
+     */
+    getWeapon(slot) {
+        const values = this.weapons.values();
+        if (slot < 0 || slot > 3 || slot > values.length()) {
+            return values[slot];
+        } else {
+            return null;
         }
     }
 }
