@@ -31,7 +31,11 @@ class RoomScene extends Scene {
             left: Phaser.Input.Keyboard.KeyCodes.A,
             right: Phaser.Input.Keyboard.KeyCodes.D,
             attack: Phaser.Input.Keyboard.KeyCodes.SPACE,
-            inventory: Phaser.Input.Keyboard.KeyCodes.ESC});
+            inventory: Phaser.Input.Keyboard.KeyCodes.ESC,
+            weapon1: Phaser.Input.Keyboard.KeyCodes.ONE,
+            weapon2: Phaser.Input.Keyboard.KeyCodes.TWO,
+            weapon3: Phaser.Input.Keyboard.KeyCodes.THREE,
+            weapon4: Phaser.Input.Keyboard.KeyCodes.FOUR});
 
         this.enterKey = this.input.keyboard.addKeys({
             enter: Phaser.Input.Keyboard.KeyCodes.ENTER

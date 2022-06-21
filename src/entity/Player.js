@@ -8,7 +8,7 @@ class Player extends LivingEntity {
         // Don't remember why I thought I needed this?
         this.enemies = enemies;
         this.inventory = new Inventory();
-        this.activeWeapon = "";
+        this.activeWeapon = -1;
         this.setUpPlayerAnimations();
 
         // Temp weapon stuff
@@ -61,7 +61,7 @@ class Player extends LivingEntity {
 
 
     updateEntity(time, delta) {
-        const {left, right, up, down, attack, inventory} = this.cursors;
+        const {left, right, up, down, attack, inventory, weapon1, weapon2, weapon3, weapon4} = this.cursors;
 
         // Attacking
         if (attack.isDown && this.attackCooldownCounter >= this.attackCooldown) {
@@ -73,6 +73,17 @@ class Player extends LivingEntity {
 
         if (this.attackCooldownCounter < this.attackCooldown) {
             this.attackCooldownCounter++;
+        }
+
+        // Weapon Changing
+        if (weapon1.isDown) {
+            this.activeWeapon = 0;
+        } else if (weapon2.isDown) {
+            this.activeWeapon = 1;
+        } else if (weapon3.isDown) {
+            this.activeWeapon = 2;
+        } else if (weapon4.isDown) {
+            this.activeWeapon = 3;
         }
 
         // Inventory
