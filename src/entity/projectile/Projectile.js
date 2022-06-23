@@ -11,6 +11,7 @@ class Projectile extends MovableEntity {
         this.bounce = bounce;
         scene.physics.add.overlap(this, targets, this.onHit);
         this.setVelocityBasedOffSource();
+        this.bounceCooldown = 0;
     }
 
     onHit(projectile, target) {
@@ -48,21 +49,26 @@ class Projectile extends MovableEntity {
 
     onBoundaryCollide(blocked, boundary) {
         if (this.bounce) {
-            const points = boundary.points;
-            // lines that make up polygon
-            const lines = [];
+            if (this.bounceCooldown === 0) {
+                const points = boundary.points;
+                // lines that make up polygon
+                const lines = [];
 
-            for (let i = 0; i < points.length - 1; i++) {
-                lines.push([points[i], points[i+1]]);
+                for (let i = 0; i < points.length - 1; i++) {
+                    lines.push([points[i], points[i+1]]);
+                }
+
+                const closestLine = lines[arrayMin(lines.map(line => {
+                    return distanceFromLineSegment(line[0], line[1], this);
+                }), true)[1]];
+
+                const newSpeed = calculateBounceVelocity(closestLine, this.body.velocity);
+
+                this.setVelocity(newSpeed[0], newSpeed[1]);
+                this.bounceCooldown = 3;
+            } else {
+                this.bounceCooldown--;
             }
-
-            const closestLine = lines[arrayMin(lines.map(line => {
-                return distanceFromLineSegment(line[0], line[1], this);
-            }), true)[1]];
-
-            const newSpeed = calculateBounceVelocity(closestLine, this.body.velocity);
-
-            this.setVelocity(newSpeed[0], newSpeed[1]);
         } else {
             this.destroy(true);
         }
