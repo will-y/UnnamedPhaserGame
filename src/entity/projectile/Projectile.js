@@ -65,7 +65,7 @@ class Projectile extends MovableEntity {
                 const newSpeed = calculateBounceVelocity(closestLine, this.body.velocity);
 
                 this.setVelocity(newSpeed[0], newSpeed[1]);
-                this.bounceCooldown = 3;
+                this.bounceCooldown = 0;
             } else {
                 this.bounceCooldown--;
             }
