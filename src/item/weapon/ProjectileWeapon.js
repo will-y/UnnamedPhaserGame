@@ -15,16 +15,12 @@ class ProjectileWeapon extends Weapon {
             this.attackCooldownCounter = 0;
             const mouse = source.scene.game.input.mousePointer;
             const angle = (Math.atan2(-(mouse.worldY - source.y), mouse.worldX - source.x) * 180 / Math.PI + 360) % 360;
-            source.scene.summonProjectile(source.x, source.y, this.projectileKey, this.projectileSpeed, angle, source, true, 20);
+            source.scene.summonProjectile(source.x, source.y, this.projectileKey, this.projectileSpeed, angle, source, true, 20, true);
         }
 
         if (this.attackCooldownCounter < this.attackCooldown) {
             this.attackCooldownCounter++;
         }
-    }
-
-    summonProjectile() {
-
     }
 }
 

@@ -50,7 +50,7 @@ class Entity extends Phaser.Physics.Arcade.Sprite {
      * Return true to make the boundary do nothing
      * Return false to make the boundary block the entity's movement
      */
-    onBoundaryCollide() {
+    onBoundaryCollide(blocked, boundary) {
         return false;
     }
 }

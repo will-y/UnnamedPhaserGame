@@ -1,5 +1,6 @@
 import LivingEntity from "./LivingEntity";
 import Inventory from "../item/Inventory";
+import ItemRegistry from "../item/ItemRegistry";
 
 class Player extends LivingEntity {
     constructor(scene, x, y, key, speed, cursors, enemies) {
@@ -8,9 +9,11 @@ class Player extends LivingEntity {
         // Don't remember why I thought I needed this?
         this.enemies = enemies;
         this.inventory = new Inventory();
-        this.activeWeapon = -1;
+        this.activeWeapon = 0;
         this.setUpPlayerAnimations();
 
+
+        this.inventory.addItem(ItemRegistry.getItem("gun"), 1);
     }
 
     setUpPlayerAnimations() {
@@ -55,7 +58,6 @@ class Player extends LivingEntity {
             this.flipX = false;
         }
     }
-
 
     updateEntity(time, delta) {
         const {left, right, up, down, attack, inventory, weapon1, weapon2, weapon3, weapon4} = this.cursors;

@@ -1,17 +1,20 @@
 import MovableEntity from "../MovableEntity";
+import {arrayMin, distanceFromLineSegment} from "../../util/MathUtil";
+import {calculateBounceVelocity} from "../../util/PhysicsUtil";
 
 class Projectile extends MovableEntity {
-    constructor(scene, x, y, key, speed, direction, source, targets, damage, life) {
+    constructor(scene, x, y, key, speed, direction, source, targets, damage, life, bounce) {
         super(scene, x, y, key, speed, direction);
         this.damageAmount = damage;
         this.source = source;
         this.life = life;
+        this.bounce = bounce;
         scene.physics.add.overlap(this, targets, this.onHit);
         this.setVelocityBasedOffSource();
     }
 
     onHit(projectile, target) {
-        // Needed if collides with two enemies in the same frame
+        // Needed if collides with two enemies in the same frame (maybe)
         if (projectile.scene) {
             if (target.canDamage()) {
                 target.damage(projectile.damageAmount);
@@ -43,8 +46,26 @@ class Projectile extends MovableEntity {
         super.updateEntity(time, delta);
     }
 
-    onBoundaryCollide() {
-        this.destroy(true);
+    onBoundaryCollide(blocked, boundary) {
+        if (this.bounce) {
+            const points = boundary.points;
+            // lines that make up polygon
+            const lines = [];
+
+            for (let i = 0; i < points.length - 1; i++) {
+                lines.push([points[i], points[i+1]]);
+            }
+
+            const closestLine = lines[arrayMin(lines.map(line => {
+                return distanceFromLineSegment(line[0], line[1], this);
+            }), true)[1]];
+
+            const newSpeed = calculateBounceVelocity(closestLine, this.body.velocity);
+
+            this.setVelocity(newSpeed[0], newSpeed[1]);
+        } else {
+            this.destroy(true);
+        }
         return true;
     }
 }

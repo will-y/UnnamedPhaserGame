@@ -1,3 +1,5 @@
+import {arrayMin, distanceFromLine, distanceFromLineSegment} from "../util/MathUtil";
+
 /**
  * Class for a polygon boundary in the game
  * Used for the border of the room and for obstacles in the level
@@ -37,7 +39,7 @@ class Boundary extends Phaser.GameObjects.Image {
                 const blocked = !this.setBlocked(body.blocked, this.bodyRect, this.boundary);
 
                 if (blocked) {
-                    if (!entity.onBoundaryCollide()) {
+                    if (!entity.onBoundaryCollide(body.blocked, this.boundary)) {
                         this.clampVelocity(body.velocity, body.blocked);
                     }
                 }
