@@ -88,10 +88,10 @@ class RoomScene extends Scene {
         gameObject.scene.makeBoundryArray.push(pointer.worldX, pointer.worldY);
     }
 
-    summonProjectile(x, y, key, speed, direction, source, friendly, damage, bounce) {
+    summonProjectile(x, y, key, speed, direction, source, friendly, damage, bounce, heatSeek) {
         // Going to need to be more than just player eventually
         const targets = friendly ? this.gameObjects["enemy"] : this.player;
-        const projectile = new Projectile(this, x, y, key, speed, direction, source, targets, damage, 500, bounce);
+        const projectile = new Projectile(this, x, y, key, speed, direction, source, targets, damage, 500, bounce, heatSeek);
 
         this.entities.push(projectile);
     }

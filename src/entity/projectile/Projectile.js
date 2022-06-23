@@ -3,12 +3,14 @@ import {arrayMin, distanceFromLineSegment} from "../../util/MathUtil";
 import {calculateBounceVelocity} from "../../util/PhysicsUtil";
 
 class Projectile extends MovableEntity {
-    constructor(scene, x, y, key, speed, direction, source, targets, damage, life, bounce) {
+    constructor(scene, x, y, key, speed, direction, source, targets, damage, life, bounce=false, heatSeek=false) {
         super(scene, x, y, key, speed, direction);
-        this.damageAmount = damage;
         this.source = source;
+        this.targets = targets;
+        this.damageAmount = damage;
         this.life = life;
         this.bounce = bounce;
+        this.heatSeek = heatSeek;
         scene.physics.add.overlap(this, targets, this.onHit);
         this.setVelocityBasedOffSource();
     }
@@ -43,6 +45,17 @@ class Projectile extends MovableEntity {
         if (this.life <= 0) {
             this.destroy(true);
         }
+
+        // Heat Seeking things
+        if (this.heatSeek && this.targets && this.targets.children.entries.length > 0) {
+            const closestEnemy = this.targets.children.entries[arrayMin(this.targets.children.entries.map(target => target.distanceTo(this)), true)[1]];
+
+
+            this.direction = (Math.atan2(this.y - closestEnemy.y, closestEnemy.x - this.x) * 180 / Math.PI + 360) % 360;
+            this.speed = this.maxSpeed;
+            this.velocityChanged = true;
+        }
+
         super.updateEntity(time, delta);
     }
 

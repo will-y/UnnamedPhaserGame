@@ -58,10 +58,6 @@ class Rat extends Enemy {
             this.body.setSize(this.hitboxHeight, this.hitboxWidth);
         }
     }
-
-    updateEntity(time, delta) {
-        super.updateEntity(time, delta);
-    }
 }
 
 export default Rat;

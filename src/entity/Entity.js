@@ -53,6 +53,14 @@ class Entity extends Phaser.Physics.Arcade.Sprite {
     onBoundaryCollide(blocked, boundary) {
         return false;
     }
+
+    /**
+     * Returns the distance to another entity
+     * @param other
+     */
+    distanceTo(other) {
+        return Phaser.Math.Distance.Between(this.x, this.y, other.x, other.y);
+    }
 }
 
 export default Entity;
