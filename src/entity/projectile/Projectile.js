@@ -62,6 +62,10 @@ class Projectile extends MovableEntity {
             this.velocityChanged = true;
         }
 
+        if (this.velocityChanged) {
+            this.angle = -this.direction;
+        }
+
         super.updateEntity(time, delta);
     }
 
