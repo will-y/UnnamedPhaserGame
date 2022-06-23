@@ -17,7 +17,9 @@ class Projectile extends MovableEntity {
         this.setScale(this.spriteScale, this.spriteScale);
 
         scene.physics.add.overlap(this, targets, this.onHit);
-        this.setVelocityBasedOffSource();
+        if (this.source) {
+            this.setVelocityBasedOffSource();
+        }
     }
 
     onHit(projectile, target) {
@@ -87,7 +89,13 @@ class Projectile extends MovableEntity {
     }
 
     destroy(fromScene) {
-
+        if (this.split) {
+            // TODO: this is going to be a problem if friendly ever matters
+            this.scene.summonProjectile(this.x, this.y, this.key, this.speed, 0, null, true, this.damageAmount / 2, this.scale / 2, this.bounce, this.heatSeek, false);
+            this.scene.summonProjectile(this.x, this.y, this.key, this.speed, 90, null, true, this.damageAmount / 2, this.scale / 2, this.bounce, this.heatSeek, false);
+            this.scene.summonProjectile(this.x, this.y, this.key, this.speed, 180, null, true, this.damageAmount / 2, this.scale / 2, this.bounce, this.heatSeek, false);
+            this.scene.summonProjectile(this.x, this.y, this.key, this.speed, 270, null, true, this.damageAmount / 2, this.scale / 2, this.bounce, this.heatSeek, false);
+        }
         super.destroy(fromScene);
     }
 }
