@@ -28,6 +28,11 @@
       "type": "image"
     },
     {
+      "key": "laser",
+      "url": "assets/sprite/projectile/laser.png",
+      "type": "image"
+    },
+    {
       "key": "sword",
       "url": "assets/sprite/weapon/sword.png",
       "type": "image"

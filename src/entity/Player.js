@@ -13,7 +13,7 @@ class Player extends LivingEntity {
         this.setUpPlayerAnimations();
 
 
-        this.inventory.addItem(ItemRegistry.getItem("gun"), 1);
+        this.inventory.addItem(ItemRegistry.getItem("laser_gun"), 1);
     }
 
     setUpPlayerAnimations() {
