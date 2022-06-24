@@ -30,7 +30,9 @@
     {
       "key": "laser",
       "url": "assets/sprite/projectile/laser.png",
-      "type": "image"
+      "type": "sprite_sheet",
+      "width": 15,
+      "height": 7
     },
     {
       "key": "sword",
