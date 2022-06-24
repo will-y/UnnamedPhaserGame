@@ -5,7 +5,7 @@ class Weapon extends Item {
         super(key, type);
     }
 
-    useItem(scene, x, y) {
+    useItem(scene, attack) {
         console.log("Sword used");
     }
 }

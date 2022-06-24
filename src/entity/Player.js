@@ -62,12 +62,10 @@ class Player extends LivingEntity {
     updateEntity(time, delta) {
         const {left, right, up, down, attack, inventory, weapon1, weapon2, weapon3, weapon4} = this.cursors;
 
-        if (attack.isDown) {
-            const weapon = this.inventory.getWeapon(this.activeWeapon);
+        const weapon = this.inventory.getWeapon(this.activeWeapon);
 
-            if (weapon) {
-                weapon.useItem(this);
-            }
+        if (weapon) {
+            weapon.useItem(this, attack);
         }
 
         // Weapon Changing

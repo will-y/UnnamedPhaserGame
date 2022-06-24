@@ -15,9 +15,9 @@ class ProjectileWeapon extends Weapon {
         this.split = split;
     }
 
-    useItem(source) {
+    useItem(source, attack) {
         // Attacking
-        if (this.attackCooldownCounter >= this.attackCooldown) {
+        if (attack.isDown && this.attackCooldownCounter >= this.attackCooldown) {
             this.attackCooldownCounter = 0;
             const mouse = source.scene.game.input.mousePointer;
             const angle = (Math.atan2(-(mouse.worldY - source.y), mouse.worldX - source.x) * 180 / Math.PI + 360) % 360;
