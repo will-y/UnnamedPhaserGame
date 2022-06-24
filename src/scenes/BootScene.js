@@ -18,7 +18,7 @@ class BootScene extends Scene {
         // Maybe do the same thing with entities later
         ItemRegistry.register(new Item("coin", "other"));
         ItemRegistry.register(new Weapon("sword", "primary"));
-        ItemRegistry.register(new ProjectileWeapon("gun", "primary", 10, 200, "projectile-basic", 0.75, false, 0, false));
+        ItemRegistry.register(new ProjectileWeapon("gun", "primary", 10, 200, "projectile-basic", 0.5, false, 0, false));
         ItemRegistry.register(new LaserProjectileWeapon("laser_gun", "primary", 5, 250, "laser", 1.25, false, 0, false, false));
     }
 

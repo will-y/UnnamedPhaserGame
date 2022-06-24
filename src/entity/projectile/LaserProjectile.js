@@ -6,7 +6,7 @@ class LaserProjectile extends Projectile {
 
         scene.anims.create({
             key: "laser_move",
-            frames: this.anims.generateFrameNumbers('laser', {start: 1, end: 2}),
+            frames: this.anims.generateFrameNumbers('laser', {start: 0, end: 5}),
             frameRate: 8,
             repeat: -1
         });
