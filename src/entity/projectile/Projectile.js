@@ -15,6 +15,7 @@ class Projectile extends MovableEntity {
         this.split = split;
 
         this.setScale(this.spriteScale, this.spriteScale);
+        this.angle = -this.direction;
 
         scene.physics.add.overlap(this, targets, this.onHit);
         if (this.source) {
