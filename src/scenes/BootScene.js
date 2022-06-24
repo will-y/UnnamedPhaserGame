@@ -4,6 +4,7 @@ import ItemRegistry from"../item/ItemRegistry";
 import Item from "../item/Item";
 import ProjectileWeapon from "../item/weapon/ProjectileWeapon";
 import Weapon from "../item/weapon/Weapon";
+import LaserProjectileWeapon from "../item/weapon/LaserProjectileWeapon";
 
 class BootScene extends Scene {
     constructor() {
@@ -18,7 +19,7 @@ class BootScene extends Scene {
         ItemRegistry.register(new Item("coin", "other"));
         ItemRegistry.register(new Weapon("sword", "primary"));
         ItemRegistry.register(new ProjectileWeapon("gun", "primary", 10, 200, "projectile-basic", 0.75, false, 0, false));
-        ItemRegistry.register(new ProjectileWeapon("laser_gun", "primary", 5, 250, "laser", 1.25, false, 0, false, false))
+        ItemRegistry.register(new LaserProjectileWeapon("laser_gun", "primary", 5, 250, "laser", 1.25, false, 0, false, false));
     }
 
     create() {
